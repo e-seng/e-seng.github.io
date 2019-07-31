@@ -5,6 +5,7 @@ header{
 
 body{
 	font-family: 'Quicksand', sans-serif;
+	color: #091c1c;
 	background-color: #eee5de;
 }
 
@@ -16,6 +17,7 @@ body{
 }
 
 section.hanging_logo{
+	padding: 0;
 	background-color: #c1e9aa;
 	height: 70px;
 	width: 70px;
