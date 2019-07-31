@@ -1,7 +1,23 @@
 header{
-	background-color: #c1e9aa;
 	padding: 4px;
-	line-height: 1;
+	line-height: 1.25;
+}
+
+section.hanging_logo{
+	background-color: #c1e9aa;
+	height: 50px;
+	width: 50px;
+	margin: 0px;
+}
+
+ul.navbar{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li{
+	line-height: 1.25;
 }
 
 body{
