@@ -1,0 +1,47 @@
+/* -----sidebar----- */
+.sidebar{
+	top: 0;
+	left: 0;
+	position: fixed;
+	background-color: #a3e19b;
+	width: 90px;
+	height: 100%;
+}
+
+section.hanging_logo{
+	padding: 0;
+	background-color: #c1e9aa;
+	height: 70px;
+	width: 70px;
+	margin: 10px;
+}
+
+.navigation{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li{
+	line-height: 1.5;
+}
+
+/*Centralizing the text in the sidebar*/
+
+.navigation a{
+	padding: 0px 0px 8px 10px;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	display: block;
+}
+
+.navigation a:link, a:visited, a:active{
+	color: #0e2314;
+	text-decoration: none
+}
+
+.navigation a:hover{
+	color: #2f4736;
+	text-decoration: underline;
+}
