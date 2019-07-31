@@ -3,6 +3,16 @@ header{
 	line-height: 1.25;
 }
 
+body{
+	font-family: 'Quicksand', sans-serif;
+	background-color: #eee5de;
+}
+
+/* sidebar */
+.sidebar{
+	background-color: #000000;
+}
+
 section.hanging_logo{
 	background-color: #c1e9aa;
 	height: 60px;
@@ -10,7 +20,7 @@ section.hanging_logo{
 	margin: 0px;
 }
 
-.navbar{
+.navigation{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -18,9 +28,4 @@ section.hanging_logo{
 
 li{
 	line-height: 1.25;
-}
-
-body{
-	font-family: 'Quicksand', sans-serif;
-	background-color: #eee5de;
 }
