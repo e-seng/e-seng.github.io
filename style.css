@@ -5,12 +5,12 @@ header{
 
 section.hanging_logo{
 	background-color: #c1e9aa;
-	height: 50px;
-	width: 50px;
+	height: 60px;
+	width: 60px;
 	margin: 0px;
 }
 
-ul.navbar{
+.navbar{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
