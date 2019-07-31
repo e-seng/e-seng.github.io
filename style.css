@@ -10,14 +10,16 @@ body{
 
 /* sidebar */
 .sidebar{
-	background-color: #000000;
+	position: fixed;
+	background-color: #a3e19b;
+	width: 90px;
 }
 
 section.hanging_logo{
 	background-color: #c1e9aa;
-	height: 60px;
-	width: 60px;
-	margin: 0px;
+	height: 70px;
+	width: 70px;
+	margin: 10px;
 }
 
 .navigation{
@@ -27,5 +29,30 @@ section.hanging_logo{
 }
 
 li{
-	line-height: 1.25;
+	line-height: 1.5;
+}
+
+/*Centralizing the text in the sidebar*/
+
+.navigation a{
+	padding: 0px 0px 8px 10px;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	display: block;
+}
+
+.navigation a:link, a:visited, a:active{
+	color: #0e2314;
+	text-decoration: none
+}
+
+.navigation a:hover{
+	color: #2f4736;
+	text-decoration: underline;
+}
+
+/* main content */
+.main{
+	margin-left: 90px;
 }
