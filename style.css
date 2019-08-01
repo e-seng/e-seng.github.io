@@ -6,12 +6,23 @@ body{
 
 /* -----main content----- */
 .main{
-	margin-left: 90px;
-	padding-top: 15px
+	margin-left: 80px;
+	padding-left: 10px;
 }
 
-.main h1{
-	font-size: 32px;
-	line-height: 0;
+.title{
+	height: 70px;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	font-size: 18px;
+	line-height: 0px;
+}
+
+.title h1{
 	text-decoration: underline;
+}
+
+.content{
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
