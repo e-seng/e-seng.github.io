@@ -27,14 +27,10 @@ section.hanging_logo{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-}
-
-li{
 	line-height: 1.5;
 }
 
 /*Centralizing the text in the sidebar*/
-
 .navigation a{
 	padding: 0px 0px 8px 10px;
 	align-content: center;
