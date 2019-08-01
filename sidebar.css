@@ -17,6 +17,7 @@ section.hanging_logo{
 }
 
 .navigation{
+	background-color: #a3e19b;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -42,6 +43,6 @@ li{
 }
 
 .navigation a:hover{
-	color: #2f4736;
+	color: #3f5746;
 	text-decoration: underline;
 }
