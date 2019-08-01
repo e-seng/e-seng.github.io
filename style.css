@@ -10,7 +10,10 @@ body{
 	background: ;
 }
 
+.main{padding-top: 15px}
+
 .main h1{
 	font-size: 32px;
+	line-height: 0;
 	text-decoration: underline;
 }
