@@ -24,7 +24,13 @@ section.content{
 	padding-bottom: 10px;
 }
 
-p, h1, li{
+h1{
+	line-height: 1.25;
+	margin: 0px;
+	padding: 15px 0;
+}
+
+p, li{
 	line-height: 1.25;
 	margin: 0px;
 }
