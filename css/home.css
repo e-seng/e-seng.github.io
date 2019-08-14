@@ -13,12 +13,19 @@ div.main{
 }
 
 section.title{
-	min-height: 70px;
-	padding: 20% 0;
-	font-size: 18px;
+	display: table;
+	height: 97.5vh;
+	width: 100%;
 }
 
-section.title h1{text-decoration: underline;}
+span.name_n_stuff{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+section.title h1{
+	text-decoration: underline;
+}
 
 section.content{
 	padding-top: 10px;
