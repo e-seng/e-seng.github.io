@@ -1,7 +1,7 @@
 body{
 	font-family: 'Quicksand', sans-serif;
 	margin: 0;
-	background-color: #7CA2A0;
+	background-color: #3D3E52;
 }
 
 /* -----main content----- */
@@ -10,16 +10,19 @@ div.main{
 	padding-left: 0px 15px;
 }
 
-.main section{
+section{
 	width: 100%;
 	top: 0;
+	margin: 0;
 	position: sticky;
 	position: -webkit-sticky;
 }
 
 #home{
+	background-color: #B9DDF7;
 	display: table;
 	height: 50vh;
+	color: #000;
 }
 
 div.title{
@@ -36,8 +39,9 @@ div.title h1{
 }
 
 #projects{
-	height: 100vh;
-	background-color: #282923;
+	display: block;
+	min-height: 100vh;
+	background-color: #3D3E52;
 }
 
 #projects p{

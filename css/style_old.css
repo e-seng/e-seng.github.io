@@ -10,6 +10,10 @@ div.main{
 	padding-left: 10px;
 }
 
+.main section{
+	height: 100vh;
+}
+
 section.title{
 	min-height: 70px;
 	padding-top: 3px;

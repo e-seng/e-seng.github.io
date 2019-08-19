@@ -3,7 +3,7 @@
 	top: 0;
 	left: 0;
 	position: fixed;
-	background-color: #374646;
+	background-color: #35668B;
 	width: 90px;
 	height: 100%;
 }
@@ -17,7 +17,7 @@ sidebar (less padding and a smaller font size) */
 
 section.hanging_logo{
 	padding: 0;
-	background-color: #7CA2A0;
+	background-color: #B9DDF7;
 	height: 70px;
 	width: 70px;
 	margin: 10px;
@@ -40,11 +40,11 @@ section.hanging_logo{
 }
 
 .navigation a:link, a:visited, a:active{
-	color: #f5fec0;
+	color: #B9DDF7;
 	text-decoration: none
 }
 
 .navigation a:hover{
-	color: #D1DAA2;
+	color: #A9CDE7;
 	text-decoration: underline;
 }
