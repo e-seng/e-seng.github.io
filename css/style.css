@@ -11,10 +11,7 @@ div.main{
 	padding-left: 0px 15px;
 }
 
-.main section{
-	height: 100vh;
-	width: 100%;
-}
+.main section{width: 100%;}
 
 #home{
 	display: table;
@@ -37,6 +34,5 @@ div.title h1{
 }
 
 #projects{
-	background-color: #c0ffee; 
-	display: flex;
+	background-color: #c0ffee;
 }
