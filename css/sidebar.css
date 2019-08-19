@@ -3,12 +3,13 @@
 	top: 0;
 	left: 0;
 	position: fixed;
-	background-color: #a3e19b;
+	background-color: #374646;
 	width: 90px;
 	height: 100%;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+/* On smaller screens, where height is less than 450px, change the style of the
+sidebar (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
@@ -16,14 +17,13 @@
 
 section.hanging_logo{
 	padding: 0;
-	background-color: #c1e9aa;
+	background-color: #7CA2A0;
 	height: 70px;
 	width: 70px;
 	margin: 10px;
 }
 
 .navigation{
-	background-color: #a3e19b;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -40,11 +40,11 @@ section.hanging_logo{
 }
 
 .navigation a:link, a:visited, a:active{
-	color: #0e2314;
+	color: #f5fec0;
 	text-decoration: none
 }
 
 .navigation a:hover{
-	color: #3f5746;
+	color: #D1DAA2;
 	text-decoration: underline;
 }

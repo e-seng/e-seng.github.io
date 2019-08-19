@@ -1,8 +1,7 @@
 body{
 	font-family: 'Quicksand', sans-serif;
-	color: #091c1c;
-	background-color: #eee5de;
 	margin: 0;
+	background-color: #7CA2A0;
 }
 
 /* -----main content----- */
@@ -11,13 +10,16 @@ div.main{
 	padding-left: 0px 15px;
 }
 
-.main section{width: 100%;}
-
-#home{
-	display: table;
+.main section{
+	width: 100%;
 	top: 0;
 	position: sticky;
 	position: -webkit-sticky;
+}
+
+#home{
+	display: table;
+	height: 50vh;
 }
 
 div.title{
@@ -34,5 +36,11 @@ div.title h1{
 }
 
 #projects{
-	background-color: #c0ffee;
+	height: 100vh;
+	background-color: #282923;
 }
+
+#projects p{
+	color: #fff;
+}
+
