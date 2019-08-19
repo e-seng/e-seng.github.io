@@ -10,7 +10,7 @@ div.main{
 	padding-left: 0px 15px;
 }
 
-section{
+div{
 	top: 0;
 	margin: 0;
 	position: sticky;
@@ -38,13 +38,18 @@ div.title h1{
 	vertical-align: middle;
 }
 
+section.links img{
+	height: 7vh;
+	width: 7vh;
+}
+
 #content{
 	display: block;
 	min-height: 100vh;
 	background-color: #3D3E52;
 }
 
-#content p{color: #B9DDF7;}
+#content{color: #B9DDF7;}
 
 #content i{
 	color: #F7CBB2;
@@ -54,6 +59,6 @@ div.title h1{
 #about{
 	padding: 10vh 10%;
 	text-align: center;
-	text-align: justify;
+/*	text-align: justify; */
 }
 
