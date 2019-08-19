@@ -11,7 +11,6 @@ div.main{
 }
 
 section{
-	width: 100%;
 	top: 0;
 	margin: 0;
 	position: sticky;
@@ -19,10 +18,11 @@ section{
 }
 
 #home{
+	min-width: 100%;
 	background-color: #B9DDF7;
 	display: table;
 	height: 50vh;
-	color: #000;
+	color: #3D3E52;
 }
 
 div.title{
@@ -38,13 +38,22 @@ div.title h1{
 	vertical-align: middle;
 }
 
-#projects{
+#content{
 	display: block;
 	min-height: 100vh;
 	background-color: #3D3E52;
 }
 
-#projects p{
-	color: #fff;
+#content p{color: #B9DDF7;}
+
+#content i{
+	color: #F7CBB2;
+	font-style: normal;
+}
+
+#about{
+	padding: 10vh 10%;
+	text-align: center;
+	text-align: justify;
 }
 
