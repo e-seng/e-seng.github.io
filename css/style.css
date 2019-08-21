@@ -40,6 +40,8 @@ div.title h1{
 	vertical-align: middle;
 }
 
+div.title i{font-style: normal;}
+
 section.links{margin: 5px;}
 
 section.links img{
