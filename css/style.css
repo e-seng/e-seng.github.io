@@ -5,19 +5,20 @@ body{
 }
 
 /* -----main content----- */
+
 div.main{
 	margin-left: 90px;
 	padding-left: 0px 15px;
 }
 
 div{
-	top: 0;
 	margin: 0;
 	position: sticky;
 	position: -webkit-sticky;
 }
 
 #home{
+	top: 0;
 	min-width: 100%;
 	background-color: #B9DDF7;
 	display: table;
@@ -30,13 +31,13 @@ div.title{
 	line-height: 1.25;
 	text-align: center;
 	vertical-align: middle;
+	font-size: 2vh;
 }
 
 div.title h1{
 	text-decoration: underline;
 	margin: 5px 0px;
 	vertical-align: middle;
-	line-height: 1.25;
 }
 
 section.links{margin: 5px;}
@@ -48,11 +49,16 @@ section.links img{
 
 #content{
 	display: block;
-	min-height: 100vh;
+	min-height: 125vh;
 	background-color: #3D3E52;
 }
 
 #content{color: #B9DDF7;}
+
+#about img{
+	height: 2vh;
+	width: 4vh;
+}
 
 #content i{
 	color: #F7CBB2;
@@ -60,7 +66,7 @@ section.links img{
 }
 
 #about{
-	padding: 10vh 10%;
+	padding: 5vh 10%;
 	text-align: center;
 /*	text-align: justify; */
 }
