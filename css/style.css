@@ -56,7 +56,10 @@ section.links img{
 	background-color: #3D3E52;
 }
 
-#content{color: #B9DDF7;}
+#content{
+	color: #B9DDF7;
+	padding: 0px 10vw;
+}
 
 #content i{
 	color: #F7CBB2;
@@ -78,16 +81,16 @@ section.links img{
 
 #about{
 	text-align: center;
-	margin: 3vh;
+	margin: 3vh 0px;
 }
 
 #about a:link, a:visited, a:active{
-	color: #F7CBB2;
+	color: #CBB2F7;
 	text-decoration: none;
 }
 
 #about a:hover{
-	color: #F7CBB2;
+	color: #CBB2F7;
 	text-decoration: underline;
 }
 
