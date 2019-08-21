@@ -67,6 +67,7 @@ section.links img{
 }
 
 #scroll{
+	font-size: 2vh;
 	padding: 5vh 10%;
 	text-align: center;
 /*	text-align: justify; */
