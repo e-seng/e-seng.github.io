@@ -50,6 +50,10 @@ section.links img{
 	margin: 2px;
 }
 
+section.links a{
+	text-decoration: none;
+}
+
 #content{
 	display: block;
 	min-height: 125vh;
@@ -58,7 +62,6 @@ section.links img{
 
 #content{
 	color: #B9DDF7;
-	padding: 0px 10vw;
 }
 
 #content i{
@@ -94,3 +97,6 @@ section.links img{
 	text-decoration: underline;
 }
 
+#projects{
+	padding: 5px 5vw;
+}
