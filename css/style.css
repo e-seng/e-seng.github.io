@@ -31,7 +31,7 @@ div.title{
 	line-height: 1.25;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 2vh;
+	font-size: 2.5vh;
 }
 
 div.title h1{
@@ -70,5 +70,9 @@ section.links img{
 	padding: 5vh 10%;
 	text-align: center;
 /*	text-align: justify; */
+}
+
+#about{
+	height: 25vh;
 }
 
