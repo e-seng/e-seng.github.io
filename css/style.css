@@ -70,12 +70,24 @@ section.links img{
 
 #scroll{
 	font-size: 2vh;
-	padding: 5vh 10%;
+	padding-top: 5vh;
+	padding-right: 10%;
+	padding-left: 10%;
 	text-align: center;
-/*	text-align: justify; */
 }
 
 #about{
-	height: 25vh;
+	text-align: center;
+	margin: 3vh;
+}
+
+#about a:link, a:visited, a:active{
+	color: #F7CBB2;
+	text-decoration: none;
+}
+
+#about a:hover{
+	color: #F7CBB2;
+	text-decoration: underline;
 }
 
