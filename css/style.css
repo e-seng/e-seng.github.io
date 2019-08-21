@@ -56,17 +56,17 @@ section.links img{
 
 #content{color: #B9DDF7;}
 
-#about img{
-	height: 2vh;
-	width: 4vh;
-}
-
 #content i{
 	color: #F7CBB2;
 	font-style: normal;
 }
 
-#about{
+#scroll img{
+	height: 2vh;
+	width: 4vh;
+}
+
+#scroll{
 	padding: 5vh 10%;
 	text-align: center;
 /*	text-align: justify; */
