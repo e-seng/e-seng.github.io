@@ -45,6 +45,7 @@ section.links{margin: 5px;}
 section.links img{
 	height: 7vh;
 	width: 7vh;
+	margin: 2px;
 }
 
 #content{
