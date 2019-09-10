@@ -34,6 +34,12 @@ div.title{
 	font-size: 2.5vh;
 }
 
+@media only screen and (max-width: 400px){
+	div.title{
+		font-size: 2vmax;
+	}
+}
+
 div.title h1{
 	text-decoration: underline;
 	margin: 5px 0px;
