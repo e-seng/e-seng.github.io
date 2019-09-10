@@ -34,7 +34,8 @@ div.title{
 	font-size: 2.5vh;
 }
 
-@media only screen and (max-width: 1080px){
+@media only screen
+	and (max-device-width: 812px){
 	div.title{
 		font-size: 2vmax;
 	}
