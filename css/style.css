@@ -31,14 +31,7 @@ div.title{
 	line-height: 1.25;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 2.5vh;
-}
-
-@media only screen
-	and (max-device-width: 812px){
-	div.title{
-		font-size: 2vmax;
-	}
+	font-size: 2vmax;
 }
 
 div.title h1{
