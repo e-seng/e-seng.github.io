@@ -48,6 +48,11 @@ section.links img{
 	height: 5vh;
 	width: 5vh;
 	margin: 2px;
+	transition: transform .2s; /* animation length */
+}
+
+section.links img:hover{
+	transform: scale(1.1);
 }
 
 section.links a{
@@ -96,6 +101,19 @@ section.links a{
 	text-decoration: underline;
 }
 
-#projects{
+#work{
 	padding: 5px 5vw;
+}
+
+
+div.project{
+
+	text-align: center;
+
+	box-sizing: content-box;
+	width: 30vw;
+	min-width: 310px;
+	float: left;
+
+	/*border: 1px solid blue;*/
 }
