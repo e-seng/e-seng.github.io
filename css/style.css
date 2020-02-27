@@ -106,11 +106,11 @@ section.links a{
     padding: 5px 5vw;
 }
 
-
-div.projects{
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
+.projects{
+	margin-left: auto;
+	margin-right: auto;
+	display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
 }
 
 .project{
