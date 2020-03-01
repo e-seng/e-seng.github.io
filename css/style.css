@@ -92,7 +92,7 @@ section.links a{
     margin: 3vh 0px;
 }
 
-#about a:link, a:visited, a:active{
+#about a:link, #about a:visited, #about a:active{
     color: #CBB2F7;
     text-decoration: none;
 }
@@ -117,6 +117,7 @@ section.links a{
     border: 1px solid #B9DDF7;
 
     width: 90%;
+    height: 400px;
     text-align: center;
     box-sizing: content-box;
 
@@ -125,12 +126,16 @@ section.links a{
     border-radius: 25px;
 }
 
-a.codelink:link, .codelink:visited, .codelink:active{
+p.project{
+    margin: 0;
+}
+
+.codelink:link, .codelink:visited, .codelink:active{
     color: #f7cbb2;
     text-decoration: none;
 }
 
-a.codelink:link, .codelink:visited, .codelink:active{
+.codelink:hover{
     color: #f7cbb2;
-    text-decoration: none;
+    text-decoration: underline;
 }
