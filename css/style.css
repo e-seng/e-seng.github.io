@@ -18,6 +18,7 @@ div{
     position: -webkit-sticky;
 }
 
+/* Upper-most portion of the page */
 #home{
     top: 0;
     min-width: 100%;
@@ -48,12 +49,13 @@ section.links{margin: 5px;}
 section.links img{
     height: 5vh;
     width: 5vh;
-    margin: 2px;
+    margin: 0.5%;
     transition: transform .2s; /* animation length */
 }
 
 section.links img:hover{
-    transform: scale(1.1);
+    transform: scale(1.1); /* make the icon grow larger when hover */
+    cursor: pointer;
 }
 
 section.links a{
@@ -102,15 +104,17 @@ section.links a{
     text-decoration: underline;
 }
 
+/* Organize all of the work so it takes a larger portion of the screen */
+
 #work{
-    padding: 5px 5vw;
+    padding: 5px 3%;
 }
 
 .projects{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr))
 }
 
 .project{
@@ -121,7 +125,8 @@ section.links a{
     text-align: center;
     box-sizing: content-box;
 
-    margin: auto;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
     margin-bottom: 5%;
     border-radius: 25px;
 }
