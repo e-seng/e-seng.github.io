@@ -2,7 +2,7 @@
 var fs = require("fs")
 var http = require('http');
 
-var port = 8080;
+var port = 80;
 
 function error404(response){
     response.writeHead(404, {"Content-Type" : "text/plain"});
