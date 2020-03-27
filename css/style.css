@@ -4,6 +4,10 @@ body{
 	background-color: #3D3E52;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 /* -----main content----- */
 
 div.main{
