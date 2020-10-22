@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-var fs = require("fs")
-var http = require('http');
+const fs = require("fs")
+const http = require("http");
+const path = require("path");
 
-var port = 80;
+var port = 9000;
 var ROOT = ".";
 
 function error404(response){
@@ -12,24 +13,42 @@ function error404(response){
     return;
 }
 
+function error500(response){
+    response.writeHead(500, {"Content-Type" : "text/plain"});
+    response.write("Error 500, something went wrong on our end");
+    response.end();
+    return;
+}
+
 function getExtension(linkName){
     return linkName.split('.').slice(-1); // Return extension
 }
 
 function getHtml(request, response){
+    filepath = path.join(ROOT, request.url);
+    if(request.url == "/"){filepath = path.join(ROOT, "index.html");}
 
+    if(!fs.existsSync(filepath)){
+        error404(response);
+        return;
+    }
+
+    data = fs.readFileSync(filepath);
+    response.writeHead(200, {"Content-Type" : "text/html"});
+    response.write(data);
+    response.end();
+    return;
 }
 
 function onRequest(request, response){
-	console.log("A user has made a request: " + request.method + " " + request.url);
+    let ip = (request.headers['x-forwarded-for'] || '').split(',').pop().trim() || 
+         request.connection.remoteAddress || 
+         request.socket.remoteAddress || 
+         request.connection.socket.remoteAddress
+	console.log(`Request from ${ip}: ${request.method} ${request.url}`);
 	
-    if(request.method == "GET" && (request.url == "/" || request.url == "/index.html")){
-        fs.readFile("./index.html",function(error, data){
-            response.writeHead(200, {"Content-Type" : "text/html"});
-
-            response.write(data);
-            response.end();
-        });
+    if(request.method === "GET" && (request.url === "/" || getExtension(request.url) === "html")){
+        getHtml(request, response);
     }else if(request.method == "GET" && request.url == "/css/style.css"){
         fs.readFile("./css/style.css",function(error, data){
             response.writeHead(200, {"Content-Type" : "text/css"});
