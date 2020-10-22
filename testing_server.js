@@ -21,7 +21,7 @@ function error500(response){
 }
 
 function getExt(linkName){
-    return linkName.split('.').slice(-1)[0]; // Return extension
+    return linkName.split('.').pop(); // Return extension
 }
 
 function getHtml(request, response){
@@ -96,9 +96,9 @@ function getPhotos(request, response){
 
 function onRequest(request, response){
     let photoExts = ["png", "jpeg", "jpg", "gif", "svg"];
-    let ip = (request.headers['x-forwarded-for'] || '').split(',').pop().trim() || 
-         request.connection.remoteAddress || 
-         request.socket.remoteAddress || 
+    let ip = (request.headers['x-forwarded-for'] || '').split(',').pop() ||
+         request.connection.remoteAddress ||
+         request.socket.remoteAddress ||
          request.connection.socket.remoteAddress;
 
 	console.log(`Request from ${ip}: ${request.method} ${request.url}`);
