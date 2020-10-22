@@ -20,11 +20,13 @@ function error500(response){
     return;
 }
 
-function getExtension(linkName){
+function getExt(linkName){
     return linkName.split('.').slice(-1)[0]; // Return extension
 }
 
 function getHtml(request, response){
+    let data;
+
     filepath = path.join(ROOT, request.url.substring(1));
     if(request.url == "/"){filepath = path.join(ROOT, "index.html");}
 
@@ -48,6 +50,8 @@ function getHtml(request, response){
 }
 
 function getCss(request, response){
+    let data;
+
     filepath = path.join(ROOT, request.url.substring(1));
     if(!fs.existsSync(filepath)){
         error404(response);
@@ -68,38 +72,43 @@ function getCss(request, response){
     return;
 }
 
+function getPhotos(request, response){
+    let filetype = getExt(request.url);
+    let contentType = `image/${filetype}`
+    let filepath = path.join(ROOT, request.url.substring(1));
+    let data;
+
+    if(filetype === "svg"){contentType = "applications/svg+xml";}
+
+    try{
+        data = fs.readFileSync(filepath);
+    }catch(err){
+        error500(response);
+        console.log(`Error: ${err}`);
+        return;
+    }
+
+    response.writeHead(200, {"Content-Type" : contentType});
+    response.write(data);
+    response.end();
+    return;
+}
+
 function onRequest(request, response){
+    let photoExts = ["png", "jpeg", "jpg", "gif", "svg"];
+
     let ip = (request.headers['x-forwarded-for'] || '').split(',').pop().trim() || 
          request.connection.remoteAddress || 
          request.socket.remoteAddress || 
          request.connection.socket.remoteAddress
 	console.log(`Request from ${ip}: ${request.method} ${request.url}`);
 	
-    if(request.method === "GET" && (request.url === "/" || getExtension(request.url) === "html")){
+    if(request.method === "GET" && (request.url === "/" || getExt(request.url) === "html")){
         getHtml(request, response);
-    }else if(request.method == "GET" && getExtension(request.url) === "css"){
+    }else if(request.method === "GET" && getExt(request.url) === "css"){
         getCss(request, response);
-    }else if(request.method == "GET" && request.url == "/images/GitHub-Mark-edited.png"){
-        fs.readFile("./images/GitHub-Mark-edited.png",function(error, data){
-            response.writeHead(200, {"Content-Type" : "image/png"});
-
-            response.write(data);
-            response.end();
-        });
-    }else if(request.method == "GET" && request.url == "/images/resume-icon.png"){
-        fs.readFile("./images/resume-icon.png",function(error, data){
-            response.writeHead(200, {"Content-Type" : "image/png"});
-
-            response.write(data);
-            response.end();
-        });
-    }else if(request.method == "GET" && request.url == "/images/scroll-arrow.png"){
-        fs.readFile("./images/scroll-arrow.png",function(error, data){
-            response.writeHead(200, {"Content-Type" : "image/png"});
-
-            response.write(data);
-            response.end();
-        });
+    }else if(request.method === "GET" && photoExts.includes(getExt(request.url))){
+        getPhotos(request, response);
     }else{
         error404(response);
     }
