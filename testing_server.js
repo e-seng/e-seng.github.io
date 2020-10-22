@@ -96,11 +96,11 @@ function getPhotos(request, response){
 
 function onRequest(request, response){
     let photoExts = ["png", "jpeg", "jpg", "gif", "svg"];
-
     let ip = (request.headers['x-forwarded-for'] || '').split(',').pop().trim() || 
          request.connection.remoteAddress || 
          request.socket.remoteAddress || 
-         request.connection.socket.remoteAddress
+         request.connection.socket.remoteAddress;
+
 	console.log(`Request from ${ip}: ${request.method} ${request.url}`);
 	
     if(request.method === "GET" && (request.url === "/" || getExt(request.url) === "html")){
