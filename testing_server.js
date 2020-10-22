@@ -3,12 +3,21 @@ var fs = require("fs")
 var http = require('http');
 
 var port = 80;
+var ROOT = ".";
 
 function error404(response){
     response.writeHead(404, {"Content-Type" : "text/plain"});
     response.write("Error 404, page not found •-• whoops");
     response.end();
     return;
+}
+
+function getExtension(linkName){
+    return linkName.split('.').slice(-1); // Return extension
+}
+
+function getHtml(request, response){
+
 }
 
 function onRequest(request, response){
