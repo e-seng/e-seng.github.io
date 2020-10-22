@@ -21,11 +21,11 @@ function error500(response){
 }
 
 function getExtension(linkName){
-    return linkName.split('.').slice(-1); // Return extension
+    return linkName.split('.').slice(-1)[0]; // Return extension
 }
 
 function getHtml(request, response){
-    filepath = path.join(ROOT, request.url);
+    filepath = path.join(ROOT, request.url.substring(1));
     if(request.url == "/"){filepath = path.join(ROOT, "index.html");}
 
     if(!fs.existsSync(filepath)){
@@ -33,8 +33,36 @@ function getHtml(request, response){
         return;
     }
 
-    data = fs.readFileSync(filepath);
+    try{
+        data = fs.readFileSync(filepath);
+    }catch(err){
+        error500(response);
+        console.log(`Error: ${err}`)
+        return;
+    }
+    
     response.writeHead(200, {"Content-Type" : "text/html"});
+    response.write(data);
+    response.end();
+    return;
+}
+
+function getCss(request, response){
+    filepath = path.join(ROOT, request.url.substring(1));
+    if(!fs.existsSync(filepath)){
+        error404(response);
+        return;
+    }
+
+    try{
+        data = fs.readFileSync(filepath);
+    }catch(err){
+        error500(response);
+        console.log(`Error: ${err}`)
+        return;
+    }
+
+    response.writeHead(200, {"Content-Type" : "text/css"});
     response.write(data);
     response.end();
     return;
@@ -49,13 +77,8 @@ function onRequest(request, response){
 	
     if(request.method === "GET" && (request.url === "/" || getExtension(request.url) === "html")){
         getHtml(request, response);
-    }else if(request.method == "GET" && request.url == "/css/style.css"){
-        fs.readFile("./css/style.css",function(error, data){
-            response.writeHead(200, {"Content-Type" : "text/css"});
-
-            response.write(data);
-            response.end();
-        });
+    }else if(request.method == "GET" && getExtension(request.url) === "css"){
+        getCss(request, response);
     }else if(request.method == "GET" && request.url == "/images/GitHub-Mark-edited.png"){
         fs.readFile("./images/GitHub-Mark-edited.png",function(error, data){
             response.writeHead(200, {"Content-Type" : "image/png"});
