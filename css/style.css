@@ -109,8 +109,12 @@ section.links a{
 }
 
 #about{
-    text-align: center;
     margin: 3vh 0px;
+    padding: 2rem 0;
+}
+
+#about p{
+    text-align: center;
 }
 
 #about a:link, #about a:visited, #about a:active{
