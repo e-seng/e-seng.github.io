@@ -127,21 +127,18 @@ section.links a{
     margin-left: 0;
     margin-right: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr))
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    place-items: center;
+    height: 100vh;
 }
 
 .project{
     border: 1px solid var(--light-colour);
 
-    width: 90%;
-    height: 400px;
+    width: 25%;
+    height: 50px;
     text-align: center;
     box-sizing: content-box;
-
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-bottom: 5%;
-    border-radius: 25px;
 }
 
 p.project{
