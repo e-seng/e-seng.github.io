@@ -1,16 +1,29 @@
+:root{
+    font-family: 'Quicksand', sans-serif;
+
+    --dark-colour: #3D3E52;
+    --light-colour: #B9DDF7;
+    --accent-orange: #f7cbb2;
+    --accent-lav: #CBB2F7;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body *{
+    margin: 0;
+    padding: 0;
+}
+
 body{
     font-family: 'Quicksand', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #3D3E52;
+    background-color: var(--dark-colour);
 }
 
 /* -----main content----- */
-
-div.main{
-    margin-left: 90px;
-    padding-left: 0px 15px;
-}
 
 div{
     margin: 0;
@@ -22,10 +35,10 @@ div{
 #home{
     top: 0;
     min-width: 100%;
-    background-color: #B9DDF7;
+    background-color: var(--light-colour);
     display: table;
     height: 50vh;
-    color: #3D3E52;
+    color: var(--dark-colour);
 }
 
 div.title{
@@ -65,11 +78,11 @@ section.links a{
 #content{
     display: block;
     min-height: 125vh;
-    background-color: #3D3E52;
+    background-color: var(--dark-colour);
 }
 
 #content{
-    color: #B9DDF7;
+    color: var(--light-colour);
 }
 
 #content i{
@@ -95,12 +108,12 @@ section.links a{
 }
 
 #about a:link, #about a:visited, #about a:active{
-    color: #CBB2F7;
+    color: var(--accent-lav);
     text-decoration: none;
 }
 
 #about a:hover{
-    color: #CBB2F7;
+    color: var(--accent-lav);
     text-decoration: underline;
 }
 
@@ -114,23 +127,17 @@ section.links a{
     margin-left: 0;
     margin-right: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr))
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    place-items: center;
+    height: 100vh;
 }
 
 .project{
-    border: 1px solid #B9DDF7;
-
-    width: 90%;
-    height: 400px;
-    /*text-align: center;*/
+    border: 1px solid var(--light-colour);
+    width: 25%;
+    height: 50px;
+    text-align: center;
     box-sizing: content-box;
-
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-bottom: 5%;
-    border-radius: 25px;
-
-    padding: 10px;
 }
 
 p.project{
@@ -138,11 +145,11 @@ p.project{
 }
 
 .codelink:link, .codelink:visited, .codelink:active{
-    color: #f7cbb2;
+    color: var(--accent-orange);
     text-decoration: none;
 }
 
 .codelink:hover{
-    color: #f7cbb2;
+    color: var(--accent-orange);
     text-decoration: underline;
 }
