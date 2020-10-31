@@ -1,6 +1,8 @@
 :root{
     font-family: 'Quicksand', sans-serif;
 
+    font-size: 20px;
+
     --dark-colour: #3D3E52;
     --light-colour: #B9DDF7;
     --accent-orange: #f7cbb2;
@@ -60,8 +62,8 @@ div.title i{font-style: normal;}
 section.links{margin: 5px;}
 
 section.links img{
-    height: 5vh;
-    width: 5vh;
+    height: 2rem;
+    width: 2rem;
     margin: 0.5%;
     transition: transform .2s; /* animation length */
 }
@@ -100,6 +102,10 @@ section.links a{
     padding-right: 10%;
     padding-left: 10%;
     text-align: center;
+}
+
+#welcome{
+    font-size: 2rem;
 }
 
 #about{
