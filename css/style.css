@@ -113,8 +113,9 @@ section.links a{
     padding: 2rem 0;
 }
 
-#about p{
+#whoami{
     text-align: center;
+    margin: 0 1rem;
 }
 
 #about a:link, #about a:visited, #about a:active{
