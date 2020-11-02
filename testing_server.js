@@ -74,6 +74,9 @@ function getCss(request, response){
 
 function getPhotos(request, response){
     let filetype = getExt(request.url);
+
+    if(filetype === "ico"){filetype = "x-image";}
+
     let contentType = `image/${filetype}`
     let filepath = path.join(ROOT, request.url.substring(1));
     let data;
@@ -95,7 +98,7 @@ function getPhotos(request, response){
 }
 
 function onRequest(request, response){
-    let photoExts = ["png", "jpeg", "jpg", "gif", "svg"];
+    let photoExts = ["png", "jpeg", "jpg", "gif", "svg", "ico"];
     let ip = (request.headers['x-forwarded-for'] || '').split(',').pop() ||
          request.connection.remoteAddress ||
          request.socket.remoteAddress ||
