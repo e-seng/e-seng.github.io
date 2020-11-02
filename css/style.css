@@ -93,8 +93,8 @@ section.links a{
 }
 
 #scroll img{
-    height: 2vh;
-    width: 4vh;
+    height: 0.75rem;
+    width: 1.5rem;
 }
 
 #scroll{
@@ -110,12 +110,11 @@ section.links a{
 
 #about{
     margin: 3vh 0px;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
 }
 
 #whoami{
     text-align: center;
-    margin: 0 1rem;
 }
 
 #about a:link, #about a:visited, #about a:active{
