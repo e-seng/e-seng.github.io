@@ -72,6 +72,24 @@ function getCss(request, response){
     return;
 }
 
+function getJs(request, response){
+    let data;
+
+    filepath = path.join(ROOT, request.url.substring(1));
+    try{
+        data = fs.readFileSync(filepath);
+    }catch(err){
+        error500(response);
+        console.log(`Error: ${err}`);
+        return;
+    }
+
+    response.writeHead(200, {"Content-Type" : "application/javascript"});
+    response.write(data);
+    response.end();
+    return;
+}
+
 function getPhotos(request, response){
     let filetype = getExt(request.url);
 
@@ -112,6 +130,8 @@ function onRequest(request, response){
         getCss(request, response);
     }else if(request.method === "GET" && photoExts.includes(getExt(request.url))){
         getPhotos(request, response);
+    }else if(request.method === "GET" && getExt(request.url) === "js"){
+        getJs(request, response);
     }else{
         error404(response);
     }
