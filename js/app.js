@@ -15,12 +15,12 @@ function init(){
         pageHtml.outerHTML.split("\n").forEach(function(codePart){
             let indent = 0;
 
-            while(/  /.test(codePart)){
-                codePart = codePart.replace("  ", "");
+            while(/    /.test(codePart)){
+                codePart = codePart.replace("    ", "");
                 indent++;
             }
             
-            let codeLine = document.createElement("p");
+            let codeLine = document.createElement("pre");
             codeLine.setAttribute("style", `text-indent: ${indent}rem`);
             codeLine.innerText = codePart;
 
