@@ -7,11 +7,25 @@ function init(){
 
     function populateSquare(){
         let pageHtml = document.querySelector("html").cloneNode(true);
-        let codeBlock = pageHtml.querySelector("#code");
-    
+        let codeBlock = pageHtml.querySelector("#code")
         codeBlock.parentNode.removeChild(codeBlock);
 
-        document.querySelector("#code").appendChild(pageHtml);
+        let code = "";
+
+        pageHtml.outerHTML.split("\n").forEach(function(codePart){
+            let indent = 0;
+
+            while(/  /.test(codePart)){
+                codePart = codePart.replace("  ", "");
+                indent++;
+            }
+            
+            let codeLine = document.createElement("p");
+            codeLine.setAttribute("style", `text-indent: ${indent}rem`);
+            codeLine.innerText = codePart;
+
+            document.querySelector("#code").appendChild(codeLine);
+        });
     }
 
     main();
