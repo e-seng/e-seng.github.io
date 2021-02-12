@@ -44,12 +44,18 @@ function init(){
             }
         },
         "tag" : {
-            "pattern" : /[</]\w*[> ]/g,
+            "pattern" : /((&lt;)|[</])\w*((&gt;)|[> ])/g,
             "replaceFunc" : function(flag, target){
-                let targetItem = target.slice(1, -1);
-                let finalTag = target.slice(0, 1) + 
+                let startCut = 1;
+                let endCut = -1;
+                if(/&lt;/.test(target)){startCut = 4;}
+                if(/&gt;/.test(target)){endCut = -4;}
+
+                let targetItem = target.slice(startCut, endCut);
+                console.log(target, targetItem, target.indexOf("t;"));
+                let finalTag = target.slice(0, startCut) + 
                     `<span style="color: var(--html-${flag})">${targetItem}</span>`+
-                    target.slice(-1);
+                    target.slice(endCut);
 
                 console.log(finalTag);
                 return finalTag;
@@ -66,10 +72,10 @@ function init(){
             finalLine = finalLine.replaceAll(
                 syntaxFlags[flag].pattern,
                 function(target){
-                    return syntaxFlags[flag].replaceFunc(target, flag);
+                    return syntaxFlags[flag].replaceFunc(flag, target);
                 }
             );
-            console.log(Object.keys(syntaxFlags));
+            // console.log(finalLine);
         });
 
         return finalLine;
