@@ -43,8 +43,20 @@ function init(){
                 return eqChar[tag];
             }
         },
+        "attribute" : {
+            "pattern" : / \w*=/g,
+            "replaceFunc" : function(flag, target){
+                let targetItem = target.slice(1, -1);
+                let finalLine = ` <span style="color: var(--html-${flag})">`;
+                finalLine += targetItem;
+                finalLine += "</span>=";
+
+                return finalLine;
+            }
+        },
         "tag" : {
-            "pattern" : /((&lt;)|[</])\w*((&gt;)|[> ])/g,
+            // "pattern" : /((&lt;)|[</])\w*((&gt;)|[> ])/g,
+            "pattern" : /((&lt;)|\/)\w*((&gt;)| )/g,
             "replaceFunc" : function(flag, target){
                 let startCut = 1;
                 let endCut = -1;
@@ -57,7 +69,6 @@ function init(){
                     `<span style="color: var(--html-${flag})">${targetItem}</span>`+
                     target.slice(endCut);
 
-                console.log(finalTag);
                 return finalTag;
             }
         },
