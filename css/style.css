@@ -130,3 +130,19 @@ section.links a{
     color: var(--accent-lav);
     text-decoration: underline;
 }
+
+/*
+ * HTML Syntax Styling
+ */
+
+.attribute{
+    color: var(--html-attribute);
+}
+
+.startTag, .endTag, .tag{
+    color: var(--html-tag);
+}
+
+.comment{
+    color: var(--html-comment);
+}

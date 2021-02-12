@@ -22,16 +22,9 @@ function init(){
             
             let codeLine = document.createElement("pre");
             codeLine.setAttribute("style", `text-indent: ${indent}rem`);
-            codeLine.innerHTML = highlightSyntax(codePart);
 
-            document.querySelector("#code").appendChild(codeLine);
-        });
-    }
-
-    var syntaxFlags = {
-        "escapeChars" : {
-            "pattern" : /[\/<>&"]/g,
-            "replaceFunc" : function(flag, tag){
+            // Escape characters as necessary
+            codePart = codePart.replaceAll(/[\/<>&"]/g, function(tag){
                 let eqChar = {
                     "/" : "\/",
                     "<" : "&lt;",
@@ -41,37 +34,52 @@ function init(){
                 }
 
                 return eqChar[tag];
-            }
-        },
+            });
+
+            codeLine.innerHTML = highlightSyntax(codePart);
+
+            document.querySelector("#code").appendChild(codeLine);
+        });
+    }
+
+    var syntaxFlags = {
         "attribute" : {
             "pattern" : / \w*=/g,
-            "replaceFunc" : function(flag, target){
-                let targetItem = target.slice(1, -1);
-                let finalLine = ` <span style="color: var(--html-${flag})">`;
-                finalLine += targetItem;
-                finalLine += "</span>=";
-
-                return finalLine;
-            }
+            "startCut" : 1,
+            "endCut" : -1
+        },
+        "startTag" : {
+            // "pattern" : /((&lt;)|[</])\w*((&gt;)|[> ])/g,
+            "pattern" : /(&lt;)\w* /g,
+            "startCut" : 4,
+            "endCut" : -1
+        },
+        "endTag" : {
+            "pattern" : /\/\w*(&gt;)/g,
+            "startCut" : 1,
+            "endCut" : -4
         },
         "tag" : {
-            // "pattern" : /((&lt;)|[</])\w*((&gt;)|[> ])/g,
-            "pattern" : /((&lt;)|\/)\w*((&gt;)| )/g,
-            "replaceFunc" : function(flag, target){
-                let startCut = 1;
-                let endCut = -1;
-                if(/&lt;/.test(target)){startCut = 4;}
-                if(/&gt;/.test(target)){endCut = -4;}
-
-                let targetItem = target.slice(startCut, endCut);
-                console.log(target, targetItem, target.indexOf("t;"));
-                let finalTag = target.slice(0, startCut) + 
-                    `<span style="color: var(--html-${flag})">${targetItem}</span>`+
-                    target.slice(endCut);
-
-                return finalTag;
-            }
+            "pattern" : /(&lt;)\w*(&gt;)/g,
+            "startCut" : 4,
+            "endCut" : -4
         },
+        "comment" : {
+            "pattern" : /<!--[\w ]*-->/g,
+            "startCut" : 0,
+            "endCut" : -1
+        }
+    }
+
+    function syntaxFormat(target, flag, startCut, endCut){
+        let targetItem = target.slice(startCut, endCut);
+        let finalLine = target.slice(0, startCut);
+        finalLine += `<span class="${flag}">${targetItem}</span>`
+        finalLine += target.slice(endCut);
+
+        console.log(finalLine, target, startCut, endCut);
+
+        return finalLine;
     }
 
     function highlightSyntax(htmlLine){
@@ -83,7 +91,12 @@ function init(){
             finalLine = finalLine.replaceAll(
                 syntaxFlags[flag].pattern,
                 function(target){
-                    return syntaxFlags[flag].replaceFunc(flag, target);
+                    return syntaxFormat(
+                        target,
+                        flag,
+                        syntaxFlags[flag].startCut,
+                        syntaxFlags[flag].endCut
+                    );
                 }
             );
             // console.log(finalLine);
