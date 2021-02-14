@@ -139,7 +139,7 @@ section.links a{
     color: var(--html-attribute);
 }
 
-.startTag, .endTag, .tag{
+.startTag, .endTag, .attrTag{
     color: var(--html-tag);
 }
 

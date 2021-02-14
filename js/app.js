@@ -48,7 +48,7 @@ function init(){
             "startCut" : 1,
             "endCut" : -1
         },
-        "startTag" : {
+        "attrTag" : {
             // "pattern" : /((&lt;)|[</])\w*((&gt;)|[> ])/g,
             "pattern" : /(&lt;)\w* /g,
             "startCut" : 4,
@@ -59,7 +59,7 @@ function init(){
             "startCut" : 1,
             "endCut" : -4
         },
-        "tag" : {
+        "startTag" : {
             "pattern" : /(&lt;)\w*(&gt;)/g,
             "startCut" : 4,
             "endCut" : -4
