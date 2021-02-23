@@ -1,4 +1,5 @@
 :root{
+    font-family: 'IBM Plex Mono', monospace;
     font-family: 'Quicksand', sans-serif;
 
     font-size: 20px;
@@ -139,6 +140,7 @@ section.links a{
  */
 #code{
     background-color: var(--code-bg);
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 #code pre{
