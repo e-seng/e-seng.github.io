@@ -8,6 +8,9 @@
     --accent-orange: #f7cbb2;
     --accent-lav: #CBB2F7;
 
+    --code-bg: black;
+    --general-code: white;
+
     --html-tag: red;
     --html-attribute: blue;
     --html-comment: green;
@@ -134,6 +137,13 @@ section.links a{
 /*
  * HTML Syntax Styling
  */
+#code{
+    background-color: var(--code-bg);
+}
+
+#code pre{
+    color: var(--general-code);
+}
 
 .attribute{
     color: var(--html-attribute);
