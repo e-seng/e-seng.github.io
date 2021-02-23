@@ -46,36 +46,36 @@ function init(){
         "attribute" : {
             "pattern" : / \w*=/g,
             "startCut" : 1,
-            "endCut" : -1
+            "endCut" : 1
         },
         "attrTag" : {
             // "pattern" : /((&lt;)|[</])\w*((&gt;)|[> ])/g,
             "pattern" : /(&lt;)\w* /g,
             "startCut" : 4,
-            "endCut" : -1
+            "endCut" : 1
         },
         "endTag" : {
             "pattern" : /\/\w*(&gt;)/g,
             "startCut" : 1,
-            "endCut" : -4
+            "endCut" : 4
         },
         "startTag" : {
             "pattern" : /(&lt;)\w*(&gt;)/g,
             "startCut" : 4,
-            "endCut" : -4
+            "endCut" : 4
         },
         "comment" : {
-            "pattern" : /(&lt;!--)[\w ]*(--&gt);/g,
+            "pattern" : /(&lt;!--)[\w ]*(--&gt;)/g,
             "startCut" : 0,
-            "endCut" : -1
+            "endCut" : 0
         }
     }
 
     function syntaxFormat(target, flag, startCut, endCut){
-        let targetItem = target.slice(startCut, endCut);
+        let targetItem = target.slice(startCut, target.length - endCut);
         let finalLine = target.slice(0, startCut);
         finalLine += `<span class="${flag}">${targetItem}</span>`
-        finalLine += target.slice(endCut);
+        finalLine += target.slice(target.length - endCut);
 
         console.log(finalLine, target, startCut, endCut);
 
