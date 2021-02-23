@@ -115,14 +115,21 @@ function getPhotos(request, response){
     return;
 }
 
-function onRequest(request, response){
-    let photoExts = ["png", "jpeg", "jpg", "gif", "svg", "ico"];
+function createLogLine(request){
     let ip = (request.headers['x-forwarded-for'] || '').split(',').pop() ||
          request.connection.remoteAddress ||
          request.socket.remoteAddress ||
          request.connection.socket.remoteAddress;
 
-	console.log(`Request from ${ip}: ${request.method} ${request.url}`);
+    let currentTime = new Date().toISOString();
+
+    return `[${currentTime}] Request from ${ip} : ${request.method} ${request.url}`;
+}
+
+function onRequest(request, response){
+    let photoExts = ["png", "jpeg", "jpg", "gif", "svg", "ico"]; 
+
+	console.log(createLogLine(request));
 	
     if(request.method === "GET" && (request.url === "/" || getExt(request.url) === "html")){
         getHtml(request, response);
