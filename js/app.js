@@ -29,7 +29,6 @@ function init(){
                     "/" : "\/",
                     "<" : "&lt;",
                     ">" : "&gt;",
-                    "&" : "&amp;",
                     "\"" : "&quot;"
                 }
 
@@ -43,7 +42,7 @@ function init(){
     }
 
     var syntaxFlags = {
-        "attribute" : {
+        "attribute" : { 
             "pattern" : / \w*=/g,
             "startCut" : 1,
             "endCut" : 1
@@ -68,7 +67,12 @@ function init(){
             "pattern" : /(&lt;!--)[\w ]*(--&gt;)/g,
             "startCut" : 0,
             "endCut" : 0
-        }
+        },
+        "string" : {
+            "pattern" : /&quot;.*?&quot;/g,
+            "startCut" : 0,
+            "endCut" : 0
+        },
     }
 
     function syntaxFormat(target, flag, startCut, endCut){
@@ -77,7 +81,7 @@ function init(){
         finalLine += `<span class="${flag}">${targetItem}</span>`
         finalLine += target.slice(target.length - endCut);
 
-        console.log(finalLine, target, startCut, endCut);
+        // console.log(flag, ":", finalLine, target, startCut, endCut);
 
         return finalLine;
     }
@@ -87,7 +91,10 @@ function init(){
         let count = 0;
         // Check for html tags
         Object.keys(syntaxFlags).forEach(function(flag){
-            if(!syntaxFlags[flag].pattern.test(finalLine)){return;}
+            if(!syntaxFlags[flag].pattern.test(finalLine)){
+                // console.log("ignored:", flag, finalLine);
+                return;
+            }
             finalLine = finalLine.replaceAll(
                 syntaxFlags[flag].pattern,
                 function(target){
@@ -99,7 +106,7 @@ function init(){
                     );
                 }
             );
-            // console.log(finalLine);
+            console.log(finalLine);
         });
 
         return finalLine;
