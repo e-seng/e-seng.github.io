@@ -15,6 +15,7 @@
     --html-tag: red;
     --html-attribute: blue;
     --html-comment: green;
+    --html-string: orange;
 }
 
 html{
@@ -138,13 +139,21 @@ section.links a{
 /*
  * HTML Syntax Styling
  */
-#code{
+#code-block{
     background-color: var(--code-bg);
+
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+#code{
     font-family: 'IBM Plex Mono', monospace;
     
     overflow: visible;
-    position: fixed;
-    top: 0;
 }
 
 #code pre{
@@ -161,4 +170,8 @@ section.links a{
 
 .comment{
     color: var(--html-comment);
+}
+
+.string{
+    color: var(--html-string);
 }
