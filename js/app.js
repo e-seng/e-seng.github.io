@@ -24,7 +24,7 @@ function init(){
             codeLine.setAttribute("style", `text-indent: ${indent}rem`);
 
             // Escape characters as necessary
-            codePart = codePart.replaceAll(/[\/<>&"]/g, function(tag){
+            codePart = codePart.replaceAll(/[\/<>"]/g, function(tag){
                 let eqChar = {
                     "/" : "\/",
                     "<" : "&lt;",
