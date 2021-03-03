@@ -141,6 +141,10 @@ section.links a{
 #code{
     background-color: var(--code-bg);
     font-family: 'IBM Plex Mono', monospace;
+    
+    overflow: visible;
+    position: fixed;
+    top: 0;
 }
 
 #code pre{
