@@ -64,7 +64,7 @@ function init(){
             "endCut" : 4
         },
         "comment" : {
-            "pattern" : /(&lt;!--)[\w ]*(--&gt;)/g,
+            "pattern" : /(&lt;!--).*?(--&gt;)/g,
             "startCut" : 0,
             "endCut" : 0
         },
