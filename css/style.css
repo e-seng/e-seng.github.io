@@ -145,14 +145,14 @@ section.links a{
     position: absolute;
     top: 0;
     width: 100%;
+    z-index: -1;
 
     display: flex;
     justify-content: center;
 }
 
 #code{
-    font-family: 'IBM Plex Mono', monospace;
-    
+    font-family: 'IBM Plex Mono', monospace; 
     overflow: visible;
 }
 
