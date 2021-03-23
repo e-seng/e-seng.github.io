@@ -12,6 +12,7 @@
     --code-bg: black;
     --general-code: white;
 
+    --html-diamond: grey;
     --html-tag: red;
     --html-attribute: blue;
     --html-comment: green;
@@ -174,4 +175,8 @@ section.links a{
 
 .string{
     color: var(--html-string);
+}
+
+.diamond{
+    color: var(--html-diamond);
 }

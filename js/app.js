@@ -73,6 +73,11 @@ function init(){
             "startCut" : 0,
             "endCut" : 0
         },
+        "diamond" : {
+            "pattern" : /(&lt;\/)|(&lt;(?!!-{2}))|((?<!-{2})&gt;)/g,
+            "startCut" : 0,
+            "endCut" : 0
+        },
     }
 
     function syntaxFormat(target, flag, startCut, endCut){
