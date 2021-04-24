@@ -8,16 +8,13 @@
     --subtle-green: #669984;
 }
 
-/** Set base background colour and layout **/
+/** Set base background colour **/
 body{
-    display: block;
-    grid-template-rows: 100vh 100vh;
-    place-items: center;
     background-color: var(--bg-color);
 }
 
 /** Default element styles **/
-body *{
+body, body *{
     padding: 0;
     margin: 0;
     display: block;
