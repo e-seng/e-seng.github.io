@@ -28,6 +28,11 @@ body *{
     place-items: center;
 }
 
+.hidden{
+    height: 0 !important;
+    opacity: 0 !important;
+}
+
 #title{
     font-size: 1.5rem;
     color: var(--font-color);
@@ -35,8 +40,11 @@ body *{
 
 #links{
     height: 3rem;
+    transition: height 1s, opacity 1ms;
+    transition-timing-function: ease, ease;
+    display: flex;
 }
 
-#links a img{
+#links a img, #links a{
     height: 100%;
 }
