@@ -8,24 +8,26 @@
     --subtle-green: #669984;
 }
 
+/** Set base background colour and layout **/
 body{
-    display: grid;
+    display: block;
     grid-template-rows: 100vh 100vh;
     place-items: center;
     background-color: var(--bg-color);
 }
 
+/** Default element styles **/
 body *{
     padding: 0;
     margin: 0;
     display: block;
 }
 
+/** Set layout **/
 #main{
-    width: max-content;
-    height: max-content;
-    display: grid; 
+    display: grid;
     place-items: center;
+    grid-template-rows: 100vh;
 }
 
 .hidden{
@@ -34,7 +36,14 @@ body *{
 }
 
 #title{
-    font-size: 1.5rem;
+    width: max-content;
+    height: max-content;
+    display: grid;
+    place-items: center;
+}
+
+#title h1{
+    font-size: 3rem;
     color: var(--font-color);
 }
 
