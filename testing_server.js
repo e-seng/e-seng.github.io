@@ -99,7 +99,7 @@ function getPhotos(request, response){
     let filepath = path.join(ROOT, request.url.substring(1));
     let data;
 
-    if(filetype === "svg"){contentType = "applications/svg+xml";}
+    if(filetype === "svg"){contentType = "image/svg+xml";}
 
     try{
         data = fs.readFileSync(filepath);
@@ -115,7 +115,7 @@ function getPhotos(request, response){
     return;
 }
 
-function createLogLine(request){
+function createLogLine(request, code){
     let ip = (request.headers['x-forwarded-for'] || '').split(',').pop() ||
          request.connection.remoteAddress ||
          request.socket.remoteAddress ||
@@ -123,13 +123,13 @@ function createLogLine(request){
 
     let currentTime = new Date().toISOString();
 
-    return `[${currentTime}] Request from ${ip} : ${request.method} ${request.url}`;
+    return `[${currentTime}] Request from ${ip} : ${request.method} ${request.url} - ${code}`;
 }
 
 function onRequest(request, response){
     let photoExts = ["png", "jpeg", "jpg", "gif", "svg", "ico"]; 
 
-	console.log(createLogLine(request));
+    let code = 200;
 	
     if(request.method === "GET" && (request.url === "/" || getExt(request.url) === "html")){
         getHtml(request, response);
@@ -141,8 +141,10 @@ function onRequest(request, response){
         getJs(request, response);
     }else{
         error404(response);
+        code = 400
     }
 
+	console.log(createLogLine(request, code));
 }
 
 http.createServer(onRequest).listen(port);
