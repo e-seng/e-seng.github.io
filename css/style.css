@@ -51,6 +51,10 @@ body, body *{
     display: flex;
 }
 
+#links a{
+    margin: 0 0.2rem;
+}
+
 #links a img, #links a{
     height: 100%;
     transition: 50ms;
