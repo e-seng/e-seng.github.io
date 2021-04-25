@@ -53,8 +53,10 @@ body, body *{
 
 #links a img, #links a{
     height: 100%;
+    transition: 50ms;
 }
 
-#links a object:hover{
+#links a:hover{
     cursor: pointer;
+    height: 110%;
 }
