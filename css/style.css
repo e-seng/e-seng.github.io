@@ -1,105 +1,66 @@
+:root{
+    font-family: "Quicksand", sans-serif;
+    font-size: 20px;
+
+    --bg-color: #232432;
+    --unfocus-item: #5b5d7a;
+    --font-color: #befcc8;
+    --subtle-green: #669984;
+}
+
+/** Set base background colour **/
 body{
-	font-family: 'Quicksand', sans-serif;
-	margin: 0;
-	background-color: #3D3E52;
+    background-color: var(--bg-color);
 }
 
-html{
-    scroll-behavior: smooth;
+/** Default element styles **/
+body, body *{
+    padding: 0;
+    margin: 0;
+    display: block;
 }
 
-/* -----main content----- */
-
-div.main{
-	margin-left: 90px;
-	padding-left: 0px 15px;
+/** Set layout **/
+#main{
+    display: grid;
+    place-items: center;
+    grid-template-rows: 100vh;
 }
 
-div{
-	margin: 0;
-	position: sticky;
-	position: -webkit-sticky;
+.hidden{
+    height: 0 !important;
+    opacity: 0 !important;
 }
 
-#home{
-	top: 0;
-	min-width: 100%;
-	background-color: #B9DDF7;
-	display: table;
-	height: 50vh;
-	color: #3D3E52;
+#title{
+    width: max-content;
+    height: max-content;
+    display: grid;
+    place-items: center;
 }
 
-div.title{
-	display: table-cell;
-	line-height: 1.25;
-	text-align: center;
-	vertical-align: middle;
-	font-size: 2vmax;
+#title h1{
+    font-size: 3rem;
+    color: var(--font-color);
 }
 
-div.title h1{
-	text-decoration: underline;
-	margin: 5px 0px;
-	vertical-align: middle;
+#links{
+    height: 3rem;
+    transition: height 1s, opacity 1ms;
+    transition-timing-function: cubic-bezier(.68,-0.55,.27,1.55), ease;
+    display: flex;
 }
 
-div.title i{font-style: normal;}
-
-section.links{margin: 5px;}
-
-section.links img{
-	height: 5vh;
-	width: 5vh;
-	margin: 2px;
+#links a{
+    margin: 0 0.2rem;
 }
 
-section.links a{
-	text-decoration: none;
+#links a img, #links a{
+    height: 100%;
+    transition: 50ms;
 }
 
-#content{
-	display: block;
-	min-height: 125vh;
-	background-color: #3D3E52;
-}
-
-#content{
-	color: #B9DDF7;
-}
-
-#content i{
-	color: #F7CBB2;
-	font-style: normal;
-}
-
-#scroll img{
-	height: 2vh;
-	width: 4vh;
-}
-
-#scroll{
-	padding-top: 5vh;
-	padding-right: 10%;
-	padding-left: 10%;
-	text-align: center;
-}
-
-#about{
-	text-align: center;
-	margin: 3vh 0px;
-}
-
-#about a:link, a:visited, a:active{
-	color: #CBB2F7;
-	text-decoration: none;
-}
-
-#about a:hover{
-	color: #CBB2F7;
-	text-decoration: underline;
-}
-
-#projects{
-	padding: 5px 5vw;
+#links a:hover{
+    cursor: pointer;
+    height: 110%;
 }
