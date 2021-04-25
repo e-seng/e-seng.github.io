@@ -51,6 +51,10 @@ body, body *{
     display: flex;
 }
 
-#links a object, #links a{
+#links a img, #links a{
     height: 100%;
+}
+
+#links a object:hover{
+    cursor: pointer;
 }
