@@ -51,6 +51,6 @@ body, body *{
     display: flex;
 }
 
-#links a img, #links a{
+#links a object, #links a{
     height: 100%;
 }
