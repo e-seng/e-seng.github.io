@@ -64,3 +64,23 @@ body, body *{
     cursor: pointer;
     height: 110%;
 }
+
+#experience div{
+  height: 100vh;
+  perspective: 100rem;
+  transform-style: preserve-3d;
+}
+
+#processor{
+  height: 10rem;
+  width: 10rem;
+  transform: rotateZ(80deg);
+}
+
+#processor .layer-top{
+  transform: translateZ(0);
+}
+
+#processor .layer-bottom{
+  transform: translateZ(-1rem);
+}
