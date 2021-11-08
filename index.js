@@ -1,6 +1,7 @@
 /**
- * A basic nodejs server which will handle API certain API calls
- * This aPI will be vulnerable to OS command injection
+ * A simple webserver to host a website
+ *
+ * made by e-seng on GitHub
  */
 
 const http = require("http");
