@@ -79,6 +79,8 @@ body, body *{
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transform: rotateY(20deg);
 }
 
 .top{
