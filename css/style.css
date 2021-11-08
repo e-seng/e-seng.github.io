@@ -75,6 +75,9 @@ body, body *{
 .rotate{
   transform-style: preserve-3d;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #processor{
@@ -85,18 +88,29 @@ body, body *{
   transform-style: preserve-3d;
 }
 
-#processor .front{
+#processor .top{
+  height: 90%;
+  width: 90%;
+  background: green;
+  transform: translateZ(calc(var(--processor-thickness) / 2));
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  border-radius: 0.5rem;
+}
+
+#processor .center{
   height: 100%;
   width: 100%;
   background: red;
-  transform: translateZ(1rem);
+  transform: translateZ(0);
   position: absolute;
   top: 0;
   left: 0;
 }
 
 #processor .back{
-  transform: translateZ(-1rem) rotateY(180deg);
+  transform: translateZ(calc(-1 * var(--processor-thickness) / 2));
   height: 100%;
   width: 100%;
   background: blue;
