@@ -65,7 +65,7 @@ body, body *{
     height: 110%;
 }
 
-#experience div{
+#experience > div{
   height: 100vh;
   perspective: 100rem;
   transform-style: preserve-3d;
