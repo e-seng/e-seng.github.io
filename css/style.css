@@ -6,6 +6,8 @@
     --unfocus-item: #5b5d7a;
     --font-color: #befcc8;
     --subtle-green: #669984;
+
+    --processor-thickness: 1rem;
 }
 
 /** Set base background colour **/
