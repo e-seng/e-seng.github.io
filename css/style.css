@@ -81,6 +81,7 @@ body, body *{
   width: 10rem;
   transform: rotateZ(80deg);
   position: absolute;
+  transform-style: preserve-3d;
 }
 
 #processor .front{
