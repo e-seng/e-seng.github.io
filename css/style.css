@@ -71,16 +71,34 @@ body, body *{
   transform-style: preserve-3d;
 }
 
+.rotate{
+  transform-style: preserve-3d;
+  position: relative;
+}
+
 #processor{
   height: 10rem;
   width: 10rem;
   transform: rotateZ(80deg);
+  position: absolute;
 }
 
-#processor .layer-top{
-  transform: translateZ(0);
+#processor .front{
+  height: 100%;
+  width: 100%;
+  background: red;
+  transform: translateZ(1rem);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-#processor .layer-bottom{
-  transform: translateZ(-1rem);
+#processor .back{
+  transform: translateZ(-1rem) rotateY(180deg);
+  height: 100%;
+  width: 100%;
+  background: blue;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
