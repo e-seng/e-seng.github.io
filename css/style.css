@@ -152,3 +152,18 @@ body, body *{
   background: green;
   background: var(--pcb-colour);
 }
+
+#processor-markings{
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+}
+
+#processor-markings pre{
+  grid-column: 1/-1;
+}
+
+#processor-markings code{
+  font-size: 0.5rem;
+}
