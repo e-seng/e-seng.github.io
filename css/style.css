@@ -80,11 +80,14 @@ body, body *{
   align-items: center;
   justify-content: center;
 
+  height: 10rem;
+  width: 10rem;
+
   transform: rotateY(20deg);
   transition: transform 1s;
 }
 
-.rotate:hover{
+.hover-bounding:hover .rotate{
   transform: rotateY(70deg);
 }
 
@@ -110,8 +113,8 @@ body, body *{
 }
 
 #processor{
-  height: 10rem;
-  width: 10rem;
+  height: 100%;
+  width: 100%;
   transform: rotateZ(80deg);
   position: absolute;
   transform-style: preserve-3d;
