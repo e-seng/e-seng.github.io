@@ -128,6 +128,26 @@ function sendPhoto(reqPath, response, requestLog=""){
   });
 }
 
+function sendFile(reqPath, response, requestLog=""){
+  let desiredFile = `${ROOT}${reqPath}`;
+  let filetype = path.extname(reqPath).substr(1);
+
+  let contentType = `application/${filetype}`;
+
+  fs.readFile(desiredPhoto, (err, data) => {
+    if(err){
+      console.error(err);
+      send404(response, requestLog);
+      return;
+    }
+
+    response.writeHead(200, {"Content-Type": contentType});
+    response.write(data);
+    response.end();
+    writeLogs(requestLogs);
+  });
+}
+
 async function writeLogs(requestLog, responseLog="200"){
   const LOG_PATH = "/tmp/.server.log";
   console.log(`${requestLog} - ${responseLog}`);
