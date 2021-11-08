@@ -7,6 +7,7 @@
     --font-color: #befcc8;
     --subtle-green: #669984;
 
+    --thickness: 1rem;
     --processor-thickness: 1rem;
 }
 
@@ -80,23 +81,41 @@ body, body *{
   justify-content: center;
 }
 
+.top{
+  transform: translateZ(calc(var(--thickness) / 2));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.center{
+  transform: translateZ(0);
+  position: aboslute;
+  top: 0;
+  left: 0;
+}
+
+.back{
+  transform: translateZ(calc(-1 * var(--thickness) / 2));
+}
+
 #processor{
   height: 10rem;
   width: 10rem;
   transform: rotateZ(80deg);
   position: absolute;
   transform-style: preserve-3d;
+
+  --thickness: var(--processor-thickness);
 }
 
 #processor .top{
   height: 90%;
   width: 90%;
   background: green;
-  transform: translateZ(calc(var(--processor-thickness) / 2));
-  position: absolute;
+  border-radius: 0.5rem;
   top: 5%;
   left: 5%;
-  border-radius: 0.5rem;
 }
 
 #processor .center{
@@ -105,16 +124,11 @@ body, body *{
   background: red;
   transform: translateZ(0);
   position: absolute;
-  top: 0;
-  left: 0;
 }
 
 #processor .back{
-  transform: translateZ(calc(-1 * var(--processor-thickness) / 2));
   height: 100%;
   width: 100%;
   background: blue;
   position: absolute;
-  top: 0;
-  left: 0;
 }
