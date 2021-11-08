@@ -81,6 +81,11 @@ body, body *{
   justify-content: center;
 
   transform: rotateY(20deg);
+  transition: transform 1s;
+}
+
+.rotate:hover{
+  transform: rotateY(70deg);
 }
 
 .top{
