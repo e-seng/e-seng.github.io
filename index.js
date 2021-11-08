@@ -179,7 +179,8 @@ function onRequest(request, response){
 
   request.on("end", () => {
     if(request.method === "GET"){
-      if(photoExts.includes(path.extname(reqPath).substr(1))){
+      let filepath = path.extname(reqPath).substr(1);
+      if(photoExts.includes(filepath) && filepath){
         sendPhoto(reqPath, response, requestLog);
         return;
       }
