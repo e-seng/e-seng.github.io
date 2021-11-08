@@ -196,7 +196,8 @@ function onRequest(request, response){
           sendJavascript(reqPath, response, requestLog);
           break;
         default:
-          send404(response, requestLog);
+          sendFile(reqPath, response, requestLog);
+          // send404(response, requestLog);
       }
       return;
     }
