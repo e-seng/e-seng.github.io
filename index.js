@@ -168,7 +168,7 @@ function onRequest(request, response){
         case("/"):
           sendHtml(reqPath, response, requestLog);
           break;
-        case("/css/styles.css"):
+        case("/css/style.css"):
           sendCss(reqPath, response, requestLog);
           break;
         case("/js/app.js"):
