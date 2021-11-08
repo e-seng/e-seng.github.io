@@ -9,6 +9,10 @@
 
     --thickness: 1rem;
     --processor-thickness: 1rem;
+
+    --heatsink-colour: #a2a4a5;
+    --processor-shield-colour: #848687;
+    --pcb-colour: #134c54;
 }
 
 /** Set base background colour **/
@@ -125,7 +129,8 @@ body, body *{
 #processor .top{
   height: 90%;
   width: 90%;
-  background: green;
+  background: darkgrey;
+  background: var(--heatsink-colour);
   border-radius: 0.5rem;
   top: 5%;
   left: 5%;
@@ -134,11 +139,13 @@ body, body *{
 #processor .center{
   height: 100%;
   width: 100%;
-  background: red;
+  background: grey;
+  background: var(--processor-shield-colour);
 }
 
 #processor .back{
   height: 100%;
   width: 100%;
-  background: blue;
+  background: green;
+  background: var(--pcb-colour);
 }
