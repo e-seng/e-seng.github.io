@@ -105,12 +105,11 @@ function sendJavascript(reqPath, response, requestLog=""){
 
 function sendPhoto(reqPath, response, requestLog=""){
   let desiredPhoto = `${ROOT}${reqPath}`
-  let filetype = path.extname(reqPath);
+  let filetype = path.extname(reqPath).substr(1);
 
   if(filetype === "ico"){filetype = "x-image";}
 
   let contentType = `image/${filetype}`
-  let filepath = path.join(ROOT, request.url.substring(1));
   let data;
 
   if(filetype === "svg"){contentType = "image/svg+xml";}
@@ -143,7 +142,7 @@ async function writeLogs(requestLog, responseLog="200"){
 }
 
 function onRequest(request, response){
-  let photoExts = [".png", ".jpeg", ".jpg", ".gif", ".svg", ".ico"];
+  let photoExts = ["png", "jpeg", "jpg", "gif", "svg", "ico"];
   let curDate = new Date().toISOString();
   let requestLog = "";
 
@@ -160,7 +159,7 @@ function onRequest(request, response){
 
   request.on("end", () => {
     if(request.method === "GET"){
-      if(photoExts.includes(path.extname(reqPath))){
+      if(photoExts.includes(path.extname(reqPath).substr(1))){
         sendPhoto(reqPath, response, requestLog);
         return;
       }
