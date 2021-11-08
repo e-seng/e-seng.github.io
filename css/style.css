@@ -68,7 +68,6 @@ body, body *{
 #experience > div{
   height: 100vh;
   perspective: 100rem;
-  transform-style: preserve-3d;
 }
 
 .rotate{
