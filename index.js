@@ -6,9 +6,10 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
+const path = require("path");
 
 const PORT = 8000;
-const ROOT = "./public";
+const ROOT = ".";
 
 function send403(response, explination, requestLog=""){
   response.writeHead(403, {"Content-Type": "application/json"});
@@ -102,6 +103,32 @@ function sendJavascript(reqPath, response, requestLog=""){
   });
 }
 
+function sendPhoto(reqPath, response, requestLog=""){
+  let desiredPhoto = `${ROOT}${reqPath}`
+  let filetype = path.extname(reqPath);
+
+  if(filetype === "ico"){filetype = "x-image";}
+
+  let contentType = `image/${filetype}`
+  let filepath = path.join(ROOT, request.url.substring(1));
+  let data;
+
+  if(filetype === "svg"){contentType = "image/svg+xml";}
+
+  fs.readFile(desiredPhoto, (err, data) => {
+    if(err){
+      console.error(err);
+      send404(response, requestLog);
+      return;
+    }
+
+    response.writeHead(200, {"Content-Type": contentType});
+    response.write(data);
+    response.end();
+    writeLogs(requestLog);
+  });
+}
+
 async function writeLogs(requestLog, responseLog="200"){
   const LOG_PATH = "/tmp/.server.log";
   console.log(`${requestLog} - ${responseLog}`);
@@ -116,6 +143,7 @@ async function writeLogs(requestLog, responseLog="200"){
 }
 
 function onRequest(request, response){
+  let photoExts = ["png", "jpeg", "jpg", "gif", "svg", "ico"];
   let curDate = new Date().toISOString();
   let requestLog = "";
 
@@ -132,6 +160,11 @@ function onRequest(request, response){
 
   request.on("end", () => {
     if(request.method === "GET"){
+      if(photoExts.includes(path.extname(reqPath))){
+        sendPhoto(reqPath, response, requestLog);
+        return;
+      }
+
       switch(reqPath){
         case("/"):
           sendHtml(reqPath, response, requestLog);
