@@ -167,3 +167,7 @@ body, body *{
 #processor-markings code{
   font-size: 0.5rem;
 }
+
+#processor-markings #binimage{
+  fill: black;
+}
