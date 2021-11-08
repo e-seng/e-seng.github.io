@@ -143,7 +143,7 @@ async function writeLogs(requestLog, responseLog="200"){
 }
 
 function onRequest(request, response){
-  let photoExts = ["png", "jpeg", "jpg", "gif", "svg", "ico"];
+  let photoExts = [".png", ".jpeg", ".jpg", ".gif", ".svg", ".ico"];
   let curDate = new Date().toISOString();
   let requestLog = "";
 
