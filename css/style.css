@@ -92,7 +92,7 @@ body, body *{
 }
 
 .hover-bounding:hover .rotate{
-  transform: rotateY(70deg);
+  transform: rotateY(380deg);
 }
 
 .top{
