@@ -134,7 +134,7 @@ function sendFile(reqPath, response, requestLog=""){
 
   let contentType = `application/${filetype}`;
 
-  fs.readFile(desiredPhoto, (err, data) => {
+  fs.readFile(desiredFile, (err, data) => {
     if(err){
       console.error(err);
       send404(response, requestLog);
@@ -144,7 +144,7 @@ function sendFile(reqPath, response, requestLog=""){
     response.writeHead(200, {"Content-Type": contentType});
     response.write(data);
     response.end();
-    writeLogs(requestLogs);
+    writeLogs(requestLog);
   });
 }
 
