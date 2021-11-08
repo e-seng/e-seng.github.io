@@ -90,13 +90,16 @@ body, body *{
 
 .center{
   transform: translateZ(0);
-  position: aboslute;
+  position: absolute;
   top: 0;
   left: 0;
 }
 
 .back{
   transform: translateZ(calc(-1 * var(--thickness) / 2));
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #processor{
@@ -122,13 +125,10 @@ body, body *{
   height: 100%;
   width: 100%;
   background: red;
-  transform: translateZ(0);
-  position: absolute;
 }
 
 #processor .back{
   height: 100%;
   width: 100%;
   background: blue;
-  position: absolute;
 }
