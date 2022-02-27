@@ -1,19 +1,12 @@
 {
-  "name": "e-seng.github.io",
+  "name": "js_webserver",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "start": "NODE_APP_ROOT=/var/www/html node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/e-seng/e-seng.github.io.git"
-  },
-  "author": "e-seng",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/e-seng/e-seng.github.io/issues"
-  },
-  "homepage": "https://github.com/e-seng/e-seng.github.io#readme"
+  "author": "",
+  "license": "ISC"
 }
