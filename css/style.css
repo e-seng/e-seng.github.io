@@ -73,8 +73,25 @@ body, body *{
 }
 
 #experience > div{
-  height: 100vh;
+  height: 100%;
   perspective: 100rem;
+  display: flex;
+  gap: 3rem;
+  padding: auto;
+}
+
+#experience .details{
+  height: 100%;
+  width: 40vw;
+  color: var(--subtle-green);
+}
+
+#experience .details h2{
+  color: var(--font-color);
+}
+
+#experience .details p{
+  margin-top: 0.5rem;
 }
 
 .rotate{
@@ -114,6 +131,11 @@ body, body *{
   position: absolute;
   top: 0;
   left: 0;
+}
+
+/** styles for the lower-level section **/
+#low-level{
+  border-bottom: 1px solid var(--font-color);
 }
 
 #processor{
