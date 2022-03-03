@@ -10,9 +10,10 @@ const url = require("url");
 const path = require("path");
 
 const PORT = 8000;
-const ROOT = ".";
+const ROOT = process.env.NODE_APP_ROOT || ".";
+const LOG_FILE_PATH = ".log";
 
-function send403(response, explination, requestLog=""){
+function send403(response, explination){
   response.writeHead(403, {"Content-Type": "application/json"});
 
   let resJson = {
@@ -22,10 +23,9 @@ function send403(response, explination, requestLog=""){
 
   response.write(JSON.stringify(resJson));
   response.end();
-  writeLogs(requestLog, `403: ${explination}`);
 }
 
-function send404(response, requestLog=""){
+function send404(response){
   response.writeHead(404, {"Content-Type": "application/json"});
 
   let resJson = {
@@ -35,10 +35,9 @@ function send404(response, requestLog=""){
 
   response.write(JSON.stringify(resJson));
   response.end();
-  writeLogs(requestLog, `404: not found`);
 }
 
-function send500(response, error, requestLog=""){
+function send500(response, error){
   response.writeHead(500, {"Content-Type" : "text/plain"});
 
   let resJson = {
@@ -47,10 +46,9 @@ function send500(response, error, requestLog=""){
   }
   response.write(JSON.stringify(resJson));
   response.end();
-  writeLogs(requestLog, `500: ${error}`);
 }
 
-function sendHtml(reqPath, response, requestLog=""){
+function sendHtml(reqPath, response){
   let desiredHtml = `${ROOT}${reqPath}.html`;
   if(reqPath === "/"){
     desiredHtml = `${ROOT}/index.html`;
@@ -58,53 +56,52 @@ function sendHtml(reqPath, response, requestLog=""){
 
   fs.readFile(desiredHtml, (err, data) => {
     if(err){
-      console.error(err);
-      send404(response, requestLog);
+      response.errMsg = err;
+      send404(response);
       return;
     }
 
     response.writeHead(200, {"Content-Type": "text/html"});
     response.write(data);
     response.end();
-    writeLogs(requestLog);
   });
 }
 
-function sendCss(reqPath, response, requestLog=""){
+function sendCss(reqPath, response){
   let desiredCss = `${ROOT}${reqPath}`;
 
   fs.readFile(desiredCss, (err, data) => {
     if(err){
-      console.error(err);
-      send404(response, requestLog);
+      response.errMsg = err;
+      send404(response);
       return;
     }
+
+    console.log(data);
 
     response.writeHead(200, {"Content-Type": "text/css"});
     response.write(data);
     response.end();
-    writeLogs(requestLog);
   });
 }
 
-function sendJavascript(reqPath, response, requestLog=""){
+function sendJavascript(reqPath, response){
   let desiredJs = `${ROOT}${reqPath}`;
 
   fs.readFile(desiredJs, (err, data) => {
     if(err){
-      console.error(err);
-      send404(response, requestLog);
+      response.errMsg = err;
+      send404(response);
       return;
     }
 
     response.writeHead(200, {"Content-Type": "application/javascript"});
     response.write(data);
     response.end();
-    writeLogs(requestLog);
   });
 }
 
-function sendPhoto(reqPath, response, requestLog=""){
+function sendPhoto(reqPath, response){
   let desiredPhoto = `${ROOT}${reqPath}`
   let filetype = path.extname(reqPath).substr(1);
 
@@ -117,19 +114,18 @@ function sendPhoto(reqPath, response, requestLog=""){
 
   fs.readFile(desiredPhoto, (err, data) => {
     if(err){
-      console.error(err);
-      send404(response, requestLog);
+      response.errMsg = err;
+      send404(response);
       return;
     }
 
     response.writeHead(200, {"Content-Type": contentType});
     response.write(data);
     response.end();
-    writeLogs(requestLog);
   });
 }
 
-function sendFile(reqPath, response, requestLog=""){
+function sendFile(reqPath, response){
   let desiredFile = `${ROOT}${reqPath}`;
   let filetype = path.extname(reqPath).substr(1);
 
@@ -137,29 +133,33 @@ function sendFile(reqPath, response, requestLog=""){
 
   fs.readFile(desiredFile, (err, data) => {
     if(err){
-      console.error(err);
-      send404(response, requestLog);
+      response.errMsg = err;
+      send404(response);
       return;
     }
 
     response.writeHead(200, {"Content-Type": contentType});
     response.write(data);
     response.end();
-    writeLogs(requestLog);
   });
 }
 
-async function writeLogs(requestLog, responseLog="200"){
-  const LOG_PATH = "/tmp/.server.log";
-  console.log(`${requestLog} - ${responseLog}`);
-  fs.writeFileSync(LOG_PATH,
-    `${requestLog} - ${responseLog}\n`,
-    {
-      encoding: "utf-8",
-      flag: "a+",
-      mode: 0o644,
-    }
-  );
+function writeLog(request, urlInfo, reqBody, response){
+  let logPath = `${ROOT}/${LOG_FILE_PATH}`;
+  let curDate = new Date().toISOString();
+
+  let logLine = `[${curDate}] ${request.method} request to ${urlInfo.href} - ${response.statusCode}\n`;
+
+  if(reqBody) logLine += `└──${reqBody}\n`;
+  if(!!response.errMsg) logLine += ` - ${response.errMsg.message}\n`;
+
+  process.stdout.write(logLine);
+  fs.writeFileSync(logPath,
+    logLine, {
+    encode: "utf8",
+    flag: "a+",
+    mode: 0o644,
+  });
 }
 
 function onRequest(request, response){
@@ -188,17 +188,17 @@ function onRequest(request, response){
 
       switch(reqPath){
         case("/"):
-          sendHtml(reqPath, response, requestLog);
+          sendHtml(reqPath, response);
           break;
         case("/css/style.css"):
-          sendCss(reqPath, response, requestLog);
+          sendCss(reqPath, response);
           break;
         case("/js/app.js"):
-          sendJavascript(reqPath, response, requestLog);
+          sendJavascript(reqPath, response);
           break;
         default:
-          sendFile(reqPath, response, requestLog);
-          // send404(response, requestLog);
+          sendFile(reqPath, response);
+          // send404(response);
       }
       return;
     }
@@ -208,14 +208,18 @@ function onRequest(request, response){
       requestLog += `\n└── Request Body: ${reqBody}`;
       switch(reqPath){
         default:
-          send404(response, requestLog);
+          send404(response);
       }
       return;
     }
 
-    send404(response, requestLog);
+    send404(response);
+  });
+
+  response.on("close", () => {
+    writeLog(request, urlInfo, reqBody, response);
   });
 }
 
 http.createServer(onRequest).listen(PORT);
-console.log(`Server started on port ${PORT}`);
+console.log(`Server started on port ${PORT} with ROOT=${ROOT}`);
