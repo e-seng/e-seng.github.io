@@ -9,7 +9,7 @@ const fs = require("fs");
 const url = require("url");
 const path = require("path");
 
-const PORT = 8000;
+const PORT = process.env.NODE_APP_PORT || 8000;
 const ROOT = process.env.NODE_APP_ROOT || ".";
 const LOG_FILE_PATH = ".log";
 
