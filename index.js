@@ -153,12 +153,14 @@ function writeLog(request, urlInfo, reqBody, response){
   if(!!response.errMsg) logLine += ` - ${response.errMsg.message}\n`;
 
   process.stdout.write(logLine);
-  fs.writeFileSync(logPath,
-    logLine, {
-    encode: "utf8",
-    flag: "a+",
-    mode: 0o644,
-  });
+  if(ENABLE_LOG) {
+    fs.writeFileSync(logPath,
+      logLine, {
+      encode: "utf8",
+      flag: "a+",
+      mode: 0o644,
+    });
+  }
 }
 
 function onRequest(request, response){
@@ -216,8 +218,7 @@ function onRequest(request, response){
   });
 
   response.on("close", () => {
-    if(ENABLE_LOG)
-      writeLog(request, urlInfo, reqBody, response);
+    writeLog(request, urlInfo, reqBody, response);
   });
 }
 
