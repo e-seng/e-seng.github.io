@@ -12,6 +12,7 @@ const path = require("path");
 const PORT = process.env.NODE_APP_PORT || 8000;
 const ROOT = process.env.NODE_APP_ROOT || ".";
 const LOG_FILE_PATH = ".log";
+const ENABLE_LOG = process.env.NODE_APP_LOG == 0 ? false : true;
 
 function send403(response, explination){
   response.writeHead(403, {"Content-Type": "application/json"});
@@ -215,9 +216,11 @@ function onRequest(request, response){
   });
 
   response.on("close", () => {
-    writeLog(request, urlInfo, reqBody, response);
+    if(ENABLE_LOG)
+      writeLog(request, urlInfo, reqBody, response);
   });
 }
 
 http.createServer(onRequest).listen(PORT);
 console.log(`Server started on port ${PORT} with ROOT=${ROOT}`);
+if(!ENABLE_LOG) console.log("Disabled log");
