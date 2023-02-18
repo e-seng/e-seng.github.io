@@ -1,6 +1,7 @@
 /**
- * A basic nodejs server that should handle... everything that i can think
- * a basic nodejs server needs to handle.
+ * A simple webserver to host a website
+ *
+ * made by e-seng on GitHub
  */
 
 const http = require("http");
@@ -8,9 +9,10 @@ const fs = require("fs");
 const url = require("url");
 const path = require("path");
 
-const PORT = 8000;
+const PORT = process.env.NODE_APP_PORT || 8000;
 const ROOT = process.env.NODE_APP_ROOT || ".";
 const LOG_FILE_PATH = ".log";
+const ENABLE_LOG = process.env.NODE_APP_LOG == 0 ? false : true;
 
 function send403(response, explination){
   response.writeHead(403, {"Content-Type": "application/json"});
@@ -75,8 +77,6 @@ function sendCss(reqPath, response){
       send404(response);
       return;
     }
-
-    console.log(data);
 
     response.writeHead(200, {"Content-Type": "text/css"});
     response.write(data);
@@ -153,12 +153,14 @@ function writeLog(request, urlInfo, reqBody, response){
   if(!!response.errMsg) logLine += ` - ${response.errMsg.message}\n`;
 
   process.stdout.write(logLine);
-  fs.writeFileSync(logPath,
-    logLine, {
-    encode: "utf8",
-    flag: "a+",
-    mode: 0o644,
-  });
+  if(ENABLE_LOG) {
+    fs.writeFileSync(logPath,
+      logLine, {
+      encode: "utf8",
+      flag: "a+",
+      mode: 0o644,
+    });
+  }
 }
 
 function onRequest(request, response){
@@ -222,3 +224,4 @@ function onRequest(request, response){
 
 http.createServer(onRequest).listen(PORT);
 console.log(`Server started on port ${PORT} with ROOT=${ROOT}`);
+if(!ENABLE_LOG) console.log("Disabled log");

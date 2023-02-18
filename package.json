@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js",
+    "test": "NODE_APP_LOG=0 nodemon index.js",
     "start": "NODE_APP_ROOT=/var/www/html node index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
