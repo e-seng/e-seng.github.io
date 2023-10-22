@@ -29,6 +29,10 @@ body, body * {
     display: block;
 }
 
+script {
+  display: none;
+}
+
 section {
     width: 100%;
     height: 100vh;
