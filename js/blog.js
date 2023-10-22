@@ -97,11 +97,6 @@ window.addEventListener("load", async () => {
   }
 
   function listFiles(parentElement, filesJson) {
-    if(parentElement.classList.contains("loaded")) {
-      parentElement.classList.toggle("opened");
-      return;
-    }
-
     let parentDirName = parentElement.querySelector("a").href;
     let listElement = parentElement.querySelector("ul");
 
@@ -122,6 +117,11 @@ window.addEventListener("load", async () => {
           directoryLink.href = parentDirName + "/" + file.name;
 
           directoryLink.addEventListener("click", async () => {
+            if(directoryDiv.classList.contains("loaded")) {
+              directoryDiv.classList.toggle("opened");
+              return;
+            }
+
             let filesJson = await getGithubFiles(file.path);
             listFiles(directoryDiv, filesJson);
           });
