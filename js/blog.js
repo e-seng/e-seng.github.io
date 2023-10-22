@@ -66,7 +66,11 @@ window.addEventListener("load", async () => {
   async function readFile(filepath) {
     let body = await fetch(
       "https://raw.githubusercontent.com/e-seng/writeups/master/"+filepath,
-    ).then(res => {return res.text()});
+    ).then(res => {
+      if(res.ok) return res.text();
+      // otherwise, there was an error.
+      alert(`err ${res.status}: there was an issue interacting with the github API. if it's 403, the rate limit has been reached and I push a token on to my repo :p sorry about any inconvenience`);
+    });
 
     filetype = getFiletype(filepath);
 
