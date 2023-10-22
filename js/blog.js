@@ -166,6 +166,18 @@ window.addEventListener("load", async () => {
     );
   });
 
+  // check screen width to see whether the mobile view should be enabled
+  // stolen from
+  // https://stackoverflow.com/questions/36532307/rem-px-in-javascript :)
+  function convertRemToPixels(rem) {
+    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+  }
+
+  console.log(window.screen.width, window.screen.availWidth, convertRemToPixels(60));
+  if(window.screen.width <= convertRemToPixels(40)) {
+    document.querySelector("#blog-container").classList.add("mobile");
+  }
+
   // open current breadcrumb, if it's there
   if(window.location.href.indexOf('#') > -1) {
     openBreadcrumb();
