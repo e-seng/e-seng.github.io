@@ -18,7 +18,6 @@
   border-right: 1px solid var(--unfocus-item);
   width: auto;
   height: calc(100vh - 4rem);
-  overflow: hidden;
   color: var(--font-color);
   position: sticky;
   top: 2rem;
@@ -26,22 +25,24 @@
 
 #blog-container.mobile #sidebar {
   width: calc(100vw - 2rem);
-  height: min-content;
-  max-height: 90vh;
+  height: 85vh;
 
   background-color: var(--bg-color);
   border-right: none;
   border-top: 1px solid var(--unfocus-item);
-  padding: 1rem;
+  padding: 3rem 1rem;
   padding-top: 0;
   margin: 0;
 
-  overflow-y: scroll;
-
   position: fixed;
-  top: initial;
-  bottom: 0;
+  top: calc(100vh - 6rem);
   z-index: 1;
+
+  transition: top 750ms ease-in-out;
+}
+
+#blog-container.mobile #sidebar.opened {
+  top: calc(20vh - 6rem);
 }
 
 #profile {
@@ -102,6 +103,7 @@
 #sidebar a,
 #sidebar a:visited {
   color: var(--font-color);
+  background-color: var(--bg-color);
   text-decoration: none;
   display: flex;
   gap: 0.5rem;
@@ -109,12 +111,17 @@
   justify-content: end;
   position: sticky;
   top: 0;
-  background-color: var(--bg-color);
-  z-index: 1;
 }
 
 #sidebar a:hover {
   text-decoration: underline var(--font-color);
+}
+
+.blog-category > .category {
+  background-color: var(--bg-color);
+  z-index: 3;
+  width: 100%;
+  text-align: end;
 }
 
 .blog-category ul {

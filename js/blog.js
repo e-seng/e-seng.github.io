@@ -176,6 +176,9 @@ window.addEventListener("load", async () => {
   console.log(window.screen.width, window.screen.availWidth, convertRemToPixels(60));
   if(window.screen.width <= convertRemToPixels(40)) {
     document.querySelector("#blog-container").classList.add("mobile");
+    document.querySelector("#profile").addEventListener("click", () => {
+      document.querySelector("#sidebar").classList.toggle("opened");
+    });
   }
 
   // open current breadcrumb, if it's there
