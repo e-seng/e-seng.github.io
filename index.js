@@ -6,222 +6,119 @@
 
 const http = require("http");
 const fs = require("fs");
-const url = require("url");
-const path = require("path");
 
-const PORT = process.env.NODE_APP_PORT || 8000;
-const ROOT = process.env.NODE_APP_ROOT || ".";
-const LOG_FILE_PATH = ".log";
-const ENABLE_LOG = process.env.NODE_APP_LOG == 0 ? false : true;
+const PORT = process.env.APP_PORT || 8080;
+const WEB_ROOT = process.env.APP_ROOT || "./";
+const WEB_URL = process.env.APP_URL || "http://localhost";
 
-function send403(response, explination){
-  response.writeHead(403, {"Content-Type": "application/json"});
+const { networkInterfaces } = require("os");
 
-  let resJson = {
-    success: false,
-    res: `Error 403: That action is not allowed\n---\n${explination}\n---`,
-  }
+const CONTENT_TYPE_MAP = {
+  "html": "text/html",
+  "css": "text/css",
+  "txt": "text/plain",
+  "js": "application/javascript",
+  "json": "application/json",
+  "svg": "image/svg+xml",
+  "ico": "image/x-icon",
+  "png": "image/png",
+  "jpg": "image/jpg",
+  "jpeg": "image/jpg",
+  "webp": "image/webp",
+}
 
-  response.write(JSON.stringify(resJson));
+function sendError(response, code, reason) {
+  response.writeHead(code, {"Content-Type": "text/html"});
+  response.write(`
+<!doctype html>
+<html>
+  <head>
+    <title>Error: ${code}</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <meta lang="en" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1>error ${code}</h1>
+    <i>${reason}</i>
+  </body>
+</html>
+  `);
   response.end();
 }
 
-function send404(response){
-  response.writeHead(404, {"Content-Type": "application/json"});
+function getFile(pathname, response) {
+  let filepath = WEB_ROOT + (pathname.slice(-1)[0] === '/' ? pathname + "index.html" : pathname);
 
-  let resJson = {
-    success: false,
-    res: `Error 404: Nothing found for this request`,
+  if(!fs.existsSync(filepath)) {
+    sendError(response, 404, "the file you were looking for could not be found");
+    return;
   }
 
-  response.write(JSON.stringify(resJson));
-  response.end();
-}
-
-function send500(response, error){
-  response.writeHead(500, {"Content-Type" : "text/plain"});
-
-  let resJson = {
-    success: false,
-    res: `Error 500: Something went wrong within the server\n---\n${error}\n---`,
-  }
-  response.write(JSON.stringify(resJson));
-  response.end();
-}
-
-function sendHtml(reqPath, response){
-  let desiredHtml = `${ROOT}${reqPath}.html`;
-  if(reqPath === "/"){
-    desiredHtml = `${ROOT}/index.html`;
-  }
-
-  fs.readFile(desiredHtml, (err, data) => {
-    if(err){
-      response.errMsg = err;
-      send404(response);
+  fs.readFile(filepath, (err, data) => {
+    if(err) {
+      sendError(response, 500, `something actually went wrong. here's the error:
+      ${err}`)
       return;
     }
 
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write(data);
-    response.end();
-  });
-}
-
-function sendCss(reqPath, response){
-  let desiredCss = `${ROOT}${reqPath}`;
-
-  fs.readFile(desiredCss, (err, data) => {
-    if(err){
-      response.errMsg = err;
-      send404(response);
-      return;
-    }
-
-    response.writeHead(200, {"Content-Type": "text/css"});
-    response.write(data);
-    response.end();
-  });
-}
-
-function sendJavascript(reqPath, response){
-  let desiredJs = `${ROOT}${reqPath}`;
-
-  fs.readFile(desiredJs, (err, data) => {
-    if(err){
-      response.errMsg = err;
-      send404(response);
-      return;
-    }
-
-    response.writeHead(200, {"Content-Type": "application/javascript"});
-    response.write(data);
-    response.end();
-  });
-}
-
-function sendPhoto(reqPath, response){
-  let desiredPhoto = `${ROOT}${reqPath}`
-  let filetype = path.extname(reqPath).substr(1);
-
-  if(filetype === "ico"){filetype = "x-image";}
-
-  let contentType = `image/${filetype}`
-  let data;
-
-  if(filetype === "svg"){contentType = "image/svg+xml";}
-
-  fs.readFile(desiredPhoto, (err, data) => {
-    if(err){
-      response.errMsg = err;
-      send404(response);
-      return;
-    }
-
-    response.writeHead(200, {"Content-Type": contentType});
-    response.write(data);
-    response.end();
-  });
-}
-
-function sendFile(reqPath, response){
-  let desiredFile = `${ROOT}${reqPath}`;
-  let filetype = path.extname(reqPath).substr(1);
-
-  let contentType = `application/${filetype}`;
-
-  fs.readFile(desiredFile, (err, data) => {
-    if(err){
-      response.errMsg = err;
-      send404(response);
-      return;
-    }
-
-    response.writeHead(200, {"Content-Type": contentType});
-    response.write(data);
-    response.end();
-  });
-}
-
-function writeLog(request, urlInfo, reqBody, response){
-  let logPath = `${ROOT}/${LOG_FILE_PATH}`;
-  let curDate = new Date().toISOString();
-
-  let logLine = `[${curDate}] ${request.method} request to ${urlInfo.href} - ${response.statusCode}\n`;
-
-  if(reqBody) logLine += `└──${reqBody}\n`;
-  if(!!response.errMsg) logLine += ` - ${response.errMsg.message}\n`;
-
-  process.stdout.write(logLine);
-  if(ENABLE_LOG) {
-    fs.writeFileSync(logPath,
-      logLine, {
-      encode: "utf8",
-      flag: "a+",
-      mode: 0o644,
+    response.writeHead(200, {
+      "Content-Type": CONTENT_TYPE_MAP[filepath.split('.').slice(-1)[0].toLowerCase()],
     });
-  }
+    response.write(data);
+    response.end();
+  });
 }
 
-function onRequest(request, response){
-  let photoExts = ["png", "jpeg", "jpg", "gif", "svg", "ico"];
-  let curDate = new Date().toISOString();
-  let requestLog = "";
-
-  // console.log(`[${curDate}] ${request.method} request to ${request.url}`);
-  requestLog += `[${curDate}] ${request.method} request to ${request.url}`;
-
-  let urlInfo = url.parse(request.url, true);
-  let reqPath = urlInfo.pathname;
-  let reqQuery = urlInfo.query;
+function onRequest(request, response) {
   let reqBody = "";
+  let reqUrl = new URL(request.url, WEB_URL);
+
   request.on("data", (chunk) => {
     reqBody += chunk;
   });
 
   request.on("end", () => {
-    if(request.method === "GET"){
-      let filepath = path.extname(reqPath).substr(1);
-      if(photoExts.includes(filepath) && filepath){
-        sendPhoto(reqPath, response, requestLog);
-        return;
-      }
-
-      switch(reqPath){
-        case("/"):
-          sendHtml(reqPath, response);
-          break;
-        case("/css/style.css"):
-          sendCss(reqPath, response);
-          break;
-        case("/js/app.js"):
-          sendJavascript(reqPath, response);
-          break;
+    if(request.method === "GET") {
+      switch(reqUrl.pathname){
         default:
-          sendFile(reqPath, response);
-          // send404(response);
+          getFile(decodeURIComponent(reqUrl.pathname), response);
       }
-      return;
+    } else {
+      sendError(response, 501, "method not implemented");
     }
-
-    if(request.method === "POST"){
-      // console.log("└── Request Body:", reqBody);
-      requestLog += `\n└── Request Body: ${reqBody}`;
-      switch(reqPath){
-        default:
-          send404(response);
-      }
-      return;
-    }
-
-    send404(response);
   });
 
   response.on("close", () => {
-    writeLog(request, urlInfo, reqBody, response);
+    console.log(
+      `[${new Date().toISOString()}] ${request.method} request made to ${request.url}... ${response.statusCode}`);
+    if(reqBody) {
+      console.log(reqBody);
+    }
   });
 }
 
+function getIPAddress() {
+  let ipAddr = "";
+  interfaces = networkInterfaces()
+  Object.keys(interfaces).forEach((device) => {
+    // check whether the device is a wireless or ethernet device, or on macos
+    if(!device.includes("lan") && !device.includes("eth") && device !== "en0") return;
+    // here, the device is either a wireless or an ethernet network device
+    let deviceDetails = interfaces[device];
+
+    for(details of deviceDetails) {
+      ipAddr = details["address"];
+
+      // prefer ipv4 ip addresses
+      if(details["family"] !== "IPv4") continue;
+      break;
+    }
+  });
+
+  return ipAddr;
+}
+
 http.createServer(onRequest).listen(PORT);
-console.log(`Server started on port ${PORT} with ROOT=${ROOT}`);
-if(!ENABLE_LOG) console.log("Disabled log");
+console.log(`[${new Date().toISOString()}] server started on http://${getIPAddress()}:${PORT} and web root "${WEB_ROOT}"`);
+

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_APP_LOG=0 nodemon index.js",
-    "start": "NODE_APP_ROOT=/var/www/html node index.js"
+    "test": "nodemon index.js",
+    "start": "APP_PORT=80 APP_ROOT=/var/www/html node index.js"
   },
   "author": "",
   "license": "ISC",

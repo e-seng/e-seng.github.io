@@ -15,6 +15,9 @@
     --pcb-colour: #134c54;
     --pin-colour: #ad9164;
     --shade-colour: #506a6a;
+
+    --code-bg: #1a1b26;
+    --code-font-color: #9aa5ce;
 }
 
 /** Set base background colour **/
@@ -27,6 +30,10 @@ body, body * {
     padding: 0;
     margin: 0;
     display: block;
+}
+
+script {
+  display: none;
 }
 
 section {
