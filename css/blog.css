@@ -2,7 +2,8 @@
   color: var(--font-color);
   display: grid;
   grid-template-columns: minmax(15rem,1fr) 3fr;
-  height: 100vh;
+  height: 100%;
+  position: relative;
 }
 
 #sidebar {
@@ -10,9 +11,11 @@
   padding: 0 1rem;
   border-right: 1px solid var(--unfocus-item);
   width: auto;
+  height: calc(100vh - 4rem);
   overflow: hidden;
   color: var(--font-color);
-  position: relative;
+  position: sticky;
+  top: 2rem;
 }
 
 #profile {
@@ -130,21 +133,24 @@
 
 #content {
   max-width: 60rem;
-  overflow: scroll;
   padding: 2rem;
-}
-
-#content code {
-  background: #1a1b26;
-  color: #9aa5ce;
-  padding: 0.2rem;
 }
 
 #content pre {
   width: calc(100% - 4rem);
   overflow: scroll;
-  background: #1a1b26;
-  padding: 2rem;
+  background: var(--code-bg);
+  padding: 2rem 0;
+}
+
+#content code {
+  background: var(--code-bg);
+  color: var(--code-font-color);
+  padding: 0.2rem;
+}
+
+#content pre code {
+  padding: 0.2rem 2rem;
 }
 
 #content h1,
@@ -155,12 +161,20 @@
   width: 100%;
   margin-bottom: 1rem;
   margin-top: 1.5rem;
+  color: var(--subtle-green);
 }
 
 #content p {
-  margin-bottom: 0.7rem;
+  margin-bottom: 1rem;
 }
 
 #content * {
   display: inline-block;
+}
+
+#content blockquote {
+  border-left: 0.2rem solid var(--code-font-color);
+  color: var(--code-font-color);
+  padding-left: 1rem;
+  margin-bottom: 1rem;
 }

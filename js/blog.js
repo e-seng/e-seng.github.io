@@ -171,14 +171,4 @@ window.addEventListener("load", async () => {
     openBreadcrumb();
     return;
   }
-
-  // list CTF files
-  listFiles(
-    document.querySelector("#category-ctf"),
-    await getGithubFiles("/")
-  );
-
-  /*/ list notes, commented as there currently are not any
-  listFiles(document.querySelector("#category-notes"), "/");
-  // */
 });
