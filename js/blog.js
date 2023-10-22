@@ -56,7 +56,6 @@ window.addEventListener("load", async () => {
         headers: {
           "X-GitHub-Api-Version": "2022-11-28",
           "Accept": "application/vnd.github+json",
-          "Authorization": "Bearer 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",
         }
       },
     ).then(res => {return res.json()});
