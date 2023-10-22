@@ -12,9 +12,45 @@ window.addEventListener("load", async () => {
     return filepath.split('.').splice(-1)[0];
   }
 
-  async function getGithubFiles(user, repo, path) {
+  async function openBreadcrumb() {
+    let breadcrumb = document.location.href.split('#').slice(-1)[0];
+    let possibleParentElements = document.querySelectorAll(".blog-category");
+    let crumbs = breadcrumb.split('/');
+    let path = Array.from(crumbs);
+    path[0] = ''
+
+    // get opened filetree
+    let filetree = {};
+    await Promise.all(crumbs.map(async (crumb, crumbIndex) => {
+      filetree[crumb] = await getGithubFiles(path.slice(0, crumbIndex+1).join('/'));
+    }));
+
+    console.log(filetree);
+
+    crumbs.forEach((crumb, crumbIndex) => {
+      var crumb = crumbs[crumbIndex]
+      var updateParents = [];
+
+      possibleParentElements.forEach((element) => {
+        if(!element.innerText.includes(crumb)) return;
+        if(filetree[crumb].type === "file") {
+          readFile(filetree[crumb].path);
+          return;
+        }
+
+        listFiles(element, filetree[crumb]);
+        updateParents = element.querySelectorAll("div");
+        console.table(crumb, updateParents);
+      });
+
+      possibleParentElements = updateParents;
+      console.log(crumb, possibleParentElements, updateParents);
+    });
+  }
+
+  async function getGithubFiles(path) {
     let files = await fetch(
-      `https://api.github.com/repos/${user}/${repo}/contents/${path}`,
+      `https://api.github.com/repos/e-seng/writeups/contents/${path}`,
       {
         method: "GET",
         headers: {
@@ -57,22 +93,21 @@ window.addEventListener("load", async () => {
     document.querySelector("#content").appendChild(pre);
   }
 
-  async function listFiles(parentElement, filepath) {
-    let parentDirName = parentElement.querySelector("a").href;
-    let listElement = parentElement.querySelector("ul");
-
+  function listFiles(parentElement, filesJson) {
     if(parentElement.classList.contains("loaded")) {
       parentElement.classList.toggle("opened");
       return;
     }
 
-    let filesJson = await getGithubFiles("e-seng", "writeups", filepath);
+    let parentDirName = parentElement.querySelector("a").href;
+    let listElement = parentElement.querySelector("ul");
 
     if(listElement === null) {
       listElement = document.createElement("ul");
       parentElement.appendChild(listElement);
     }
 
+    console.log(filesJson);
     filesJson.forEach((file) => {
       switch(file.type) {
         case("dir"): // the file is a directory
@@ -84,8 +119,8 @@ window.addEventListener("load", async () => {
           directoryLink.href = parentDirName + "/" + file.name;
 
           directoryLink.addEventListener("click", async () => {
-            listFiles( directoryDiv, file.path,
-            );
+            let filesJson = await getGithubFiles(file.path);
+            listFiles(directoryDiv, filesJson);
           });
 
           directoryListing.appendChild(directoryLink);
@@ -117,16 +152,33 @@ window.addEventListener("load", async () => {
     parentElement.classList.add("opened");
   }
 
-  // list CTF files
-  document.querySelector("#category-ctf > a").addEventListener("click", () => {
-    listFiles(document.querySelector("#category-ctf"), "/");
+  document.querySelector("#category-ctf > a").addEventListener("click", async () => {
+    listFiles(
+      document.querySelector("#category-ctf"), 
+      await getGithubFiles("/"),
+    );
   });
-  listFiles(document.querySelector("#category-ctf"), "/");
+
+  document.querySelector("#category-notes > a").addEventListener("click", async () => {
+    listFiles(
+      document.querySelector("#category-notes"),
+      await getGithubFiles("/"),
+    );
+  });
+
+  // open current breadcrumb, if it's there
+  if(window.location.href.indexOf('#') > -1) {
+    openBreadcrumb();
+    return;
+  }
+
+  // list CTF files
+  listFiles(
+    document.querySelector("#category-ctf"),
+    await getGithubFiles("/")
+  );
 
   /*/ list notes, commented as there currently are not any
-  document.querySelector("#category-notes > a").addEventListener("click", () => {
-    listFiles(document.querySelector("#category-notes"), "/");
-  });
   listFiles(document.querySelector("#category-notes"), "/");
   // */
 });
