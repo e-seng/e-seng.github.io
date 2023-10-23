@@ -19,11 +19,18 @@ window.addEventListener("load", async () => {
     let path = Array.from(crumbs);
     path[0] = ''
 
-    // get opened filetree
     let filetree = {};
-    await Promise.all(crumbs.map(async (crumb, crumbIndex) => {
-      filetree[crumb] = await getGithubFiles(path.slice(0, crumbIndex+1).join('/'));
-    }));
+    switch(crumbs[0]){
+      case("ctfs"): // get opened filetree for writeups
+        await Promise.all(crumbs.map(async (crumb, crumbIndex) => {
+          filetree[crumb] = await getGithubFiles(path.slice(0, crumbIndex+1).join('/'));
+        }));
+        break;
+      case("notes"):
+        /// TODO when individual notes are added
+      case("default"):
+        return
+    }
 
     console.log(filetree);
 
@@ -155,19 +162,32 @@ window.addEventListener("load", async () => {
     parentElement.classList.add("opened");
   }
 
-  document.querySelector("#category-ctf > a").addEventListener("click", async () => {
+  let ctfCategory = document.querySelector("#category-ctf > a");
+  ctfCategory.addEventListener("click", async () => {
+    if(ctfCategory.parentElement.classList.contains("loaded")) {
+      ctfCategory.parentElement.classList.toggle("opened");
+      return;
+    }
+
     listFiles(
       document.querySelector("#category-ctf"), 
       await getGithubFiles("/"),
     );
   });
 
-  document.querySelector("#category-notes > a").addEventListener("click", async () => {
+  /*/ notes are note implemented yet, as none exist
+  let notesCategory = document.querySelector("#category-notes > a");
+  notesCategory.addEventListener("click", async () => {
+    if(notesCategory.parentElement.classList.contains("loaded")) {
+      notesCategory.parentElement.classList.toggle("opened");
+      return;
+    }
+
     listFiles(
       document.querySelector("#category-notes"),
       await getGithubFiles("/"),
     );
-  });
+  }); // */
 
   // check screen width to see whether the mobile view should be enabled
   // stolen from
