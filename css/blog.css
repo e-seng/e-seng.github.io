@@ -210,6 +210,11 @@
   width: 100%;
 }
 
+#content a,
+#content a:visited{
+    color: var(--subtle-green);
+}
+
 #content * {
   display: inline-block;
 }
