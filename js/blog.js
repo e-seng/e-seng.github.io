@@ -4,7 +4,6 @@ window.addEventListener("load", async () => {
     "txt",
     "py",
     "c",
-    "Dockerfile",
     /// TODO: add more as needed
   ]
 
